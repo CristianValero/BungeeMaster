@@ -11,7 +11,9 @@ import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class BungeeMaster extends Plugin
@@ -23,6 +25,11 @@ public class BungeeMaster extends Plugin
 
     public String NETWORK_NAME = null;
     public String DOMINIO = null;
+    
+    public BungeeMaster()
+    {
+		super();
+	}
 
     @Override
     public void onEnable()
@@ -125,7 +132,7 @@ public class BungeeMaster extends Plugin
 
     private void pararModulos()
     {
-        console("Â§c(!) Todos los modulos van a ser desactivados.");
+        console("§c(!) Todos los modulos van a ser desactivados.");
         for (Modulo m : modulos)
             if (m.isActivado())
                 m.finalizar();
