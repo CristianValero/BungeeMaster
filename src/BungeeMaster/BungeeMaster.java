@@ -26,7 +26,7 @@ public class BungeeMaster extends Plugin
 
     @Override
     public void onEnable()
-    {
+    {//s
         modulos = new Modulo[]
                 {
                         new JoinDomain(this),
