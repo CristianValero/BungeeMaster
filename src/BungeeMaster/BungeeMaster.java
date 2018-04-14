@@ -33,8 +33,8 @@ public class BungeeMaster extends Plugin
 	}
 
     @Override
-    public void onEnable()
-    {//s
+    public void onEnable() //Wish está bastanté tontíco
+    {
         modulos = new Modulo[]
                 {
                         new JoinDomain(this),
