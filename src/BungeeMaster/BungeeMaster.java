@@ -33,7 +33,7 @@ public class BungeeMaster extends Plugin
 	}
 
     @Override
-    public void onEnable() //Wish está bastanté tontíco
+    public void onEnable() //Juan está bastante tónto
     {
         modulos = new Modulo[]
                 {
