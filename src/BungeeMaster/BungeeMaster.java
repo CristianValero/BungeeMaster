@@ -10,9 +10,6 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -36,17 +33,15 @@ public class BungeeMaster extends Plugin
                         new ServerMotd(this)
                 };
 
-        console("Â§e------------------------------------------");
-        console("Â§e------------- [BungeeMaster] -------------");
-        console("Â§e------------------------------------------");
+        console("§e------------------------------------------");
+        console("§e------------- [BungeeMaster] -------------");
+        console("§e------------------------------------------");
 
         try
         {
 			configuraciones();
 			iniciarModulos();
 			ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuracion, new File(Datos.CARPETA_PLUGIN+Datos.CONFIG_NAME));
-
-			pruebitas();
 			//getProxy().getPluginManager().registerCommand(this, new ModuleCommand(this,"Modulo", Datos.PERMISO_ADMIN, "modulo", "module", "mdle", "md"));
 		}
         catch (ClassNotFoundException e){e.printStackTrace();}
@@ -107,34 +102,12 @@ public class BungeeMaster extends Plugin
         NETWORK_NAME = configuracion.getString("propiedades.servidor");
         DOMINIO = configuracion.getString("propiedades.dominio");
         
-        console("Â§b(!) Todas las configuraciones han sido cargadas con exito.");
-    }
-
-    private void pruebitas()
-    {
-        try
-        {
-            BufferedReader br = new BufferedReader(new FileReader(test.class.getResource("Recursos/lang.json").getPath()));
-
-            JSONParser parser = new JSONParser();
-            Object o = parser.parse(br);
-            JSONObject object = (JSONObject) o;
-            JSONObject object2 = (JSONObject) object.get("0");
-            System.out.println(object2.get("es"));
-
-        } catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        console("§b(!) Todas las configuraciones han sido cargadas con exito.");
     }
 
 	private void iniciarModulos() throws IOException
     {
-        console("Â§b(!) Listo para iniciar los modulos.");
+        console("§b(!) Listo para iniciar los modulos.");
         
         for (Modulo m : modulos)
         {
@@ -147,7 +120,7 @@ public class BungeeMaster extends Plugin
             		m.iniciar();
             }
         }
-        console("Â§b(!) Todos los modulos han sido iniciados, revisar consola en caso de error.");
+        console("§b(!) Todos los modulos han sido iniciados, revisar consola en caso de error.");
     }
 
     private void pararModulos()
