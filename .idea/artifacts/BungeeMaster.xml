@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BungeeMaster">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="BungeeMaster.jar">
+      <element id="module-output" name="BungeeMaster" />
+    </root>
+  </artifact>
+</component>

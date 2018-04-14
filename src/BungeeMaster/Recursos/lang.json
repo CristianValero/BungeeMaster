@@ -1,0 +1,52 @@
+{
+  "0":
+  {
+    "en": "yes",
+    "es": "si"
+  },
+  "1":
+  {
+    "en": "no",
+    "es": "no"
+  },
+  "2":
+  {
+    "en": "You don't have permission to execute this command.",
+    "es": "No tienes permiso para ejecutar este comando."
+  },
+  "3":
+  {
+    "en": "You don't have permission to do this.",
+    "es": "No tienes permiso para realizar esta acción."
+  },
+  "4":
+  {
+    "en": "Sorry, but this command not exists. You can try with: ",
+    "es": "Lo sentimos pero este comando no existe. Puedes probar con: "
+  },
+  "5":
+  {
+    "en": "You must specify a valid module name.",
+    "es": "Debes especificar un nombre de módulo válido."
+  },
+  "6":
+  {
+    "en": "Showing avaliable BungeeCord modules: ",
+    "es": "Mostrando modulos de BungeeCord: "
+  },
+  "7":
+  {
+    "en": "information of %modulename%",
+    "es": "información de %modulename%"
+  },
+  "8":
+  {
+    "en": "Activated: ",
+    "es": "Activado: "
+  },
+  "9":
+  {
+    "en": "§a§lYES\n\n§7Click for §aaccept §7the action",
+    "es": "§a§lSI\n\n§7Click para §aaceptar §7la acción."
+  }
+}
