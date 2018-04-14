@@ -5,6 +5,7 @@ import BungeeMaster.Listeners.Query.BBDD;
 import BungeeMaster.Listeners.Seguridad.JoinDomain;
 import BungeeMaster.Listeners.Servidor.ServerMotd;
 import BungeeMaster.Recursos.Datos;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -40,9 +41,9 @@ public class BungeeMaster extends Plugin
                         new ServerMotd(this)
                 };
 
-        console("§e------------------------------------------");
-        console("§e------------- [BungeeMaster] -------------");
-        console("§e------------------------------------------");
+        console("&e------------------------------------------");
+        console("&e------------- [BungeeMaster] -------------");
+        console("&e------------------------------------------");
 
         try
         {
@@ -109,12 +110,12 @@ public class BungeeMaster extends Plugin
         NETWORK_NAME = configuracion.getString("propiedades.servidor");
         DOMINIO = configuracion.getString("propiedades.dominio");
         
-        console("§b(!) Todas las configuraciones han sido cargadas con exito.");
+        console("&b(!) Todas las configuraciones han sido cargadas con exito.");
     }
 
 	private void iniciarModulos() throws IOException
     {
-        console("§b(!) Listo para iniciar los modulos.");
+        console("&b(!) Listo para iniciar los modulos.");
         
         for (Modulo m : modulos)
         {
@@ -127,12 +128,12 @@ public class BungeeMaster extends Plugin
             		m.iniciar();
             }
         }
-        console("§b(!) Todos los modulos han sido iniciados, revisar consola en caso de error.");
+        console("&b(!) Todos los modulos han sido iniciados, revisar consola en caso de error.");
     }
 
     private void pararModulos()
     {
-        console("§c(!) Todos los modulos van a ser desactivados.");
+        console("&c(!) Todos los modulos van a ser desactivados.");
         for (Modulo m : modulos)
             if (m.isActivado())
                 m.finalizar();
@@ -140,7 +141,7 @@ public class BungeeMaster extends Plugin
 
     public void console(String msg)
     {
-        getLogger().info("[" + NETWORK_NAME + "] "+msg);
+        getLogger().info("[" + NETWORK_NAME + "] "+ ChatColor.translateAlternateColorCodes('&', msg));
     }
 
     public String getNetworkName()

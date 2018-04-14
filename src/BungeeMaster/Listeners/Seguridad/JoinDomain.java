@@ -17,7 +17,7 @@ public class JoinDomain extends Modulo
     {
         if (!isActivado())
         {
-            getPlugin().console("§eIniciando modulo: "+getNombre());
+            getPlugin().console("&eIniciando modulo: "+getNombre());
 
             setActivado(true);
         }
@@ -36,7 +36,7 @@ public class JoinDomain extends Modulo
     @Override
     public void finalizar()
     {
-        getPlugin().console("§cDesactivando modulo: "+getNombre());
+        getPlugin().console("&cDesactivando modulo: "+getNombre());
         setActivado(false);
     }
 }
