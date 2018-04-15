@@ -7,8 +7,6 @@ public class Datos
 
     public static final String PERMISO_ADMIN = "bungeemaster.admin";
 
-    public static final int MENSAJES_CARGADOS = 18;
-
     /** RUTAS DE LA CONFIG */
     public static final String CONFIG_PROPIEDADES_SERVIDOR = "propiedades.servidor";
     public static final String CONFIG_PROPIEDADES_DOMINIO = "propiedades.dominio";
@@ -22,4 +20,6 @@ public class Datos
     public static final String CONFIG_MYSQL_PREFIX = "mysql.prefix";
 
     public static final String LANG_JSON_PATH = "lang.json";
+
+    public static int MENSAJES_CARGADOS = 18;
 }

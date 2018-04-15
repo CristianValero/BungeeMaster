@@ -32,14 +32,17 @@ public class Mensajes
         JSONParser parser = new JSONParser();
         JSONObject object = (JSONObject) parser.parse(br), msg;
 
-        for (int i=0; i<=Datos.MENSAJES_CARGADOS; i++)
-        {
-            msg = (JSONObject) object.get(String.valueOf(i));
+		int contador = 0;
+        while (object.get(String.valueOf(contador)) != null)
+		{
+			msg = (JSONObject) object.get(String.valueOf(contador));
 			Traducciones aux = new Traducciones();
-            for (String idioma : idiomas)
+			for (String idioma : idiomas)
 				aux.add(new Mensaje(idioma, (String)msg.get(idioma)));
-            lista.add(aux);
-        }
+			lista.add(aux);
+
+			contador++;
+		}
 	}
 	
 	public void addIdioma(String idioma)
