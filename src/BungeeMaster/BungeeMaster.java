@@ -112,6 +112,13 @@ public class BungeeMaster extends Plugin
                 config.setData(Datos.CONFIG_MYSQL_USUARIO, "root");
                 config.setData(Datos.CONFIG_MYSQL_CONTRA, "123abc");
                 config.setData(Datos.CONFIG_MYSQL_PREFIX, "nameserver_");
+                
+                for (Modulo m : modulos)
+    	        {
+    	            String path = "modulos."+m.getNombre();
+    	            if (config.getObject(path) == null)
+    	                config.setData(path, false);
+    	        }
 
                 config.save();
                 BungeeCord.getInstance().stop();
