@@ -25,10 +25,10 @@ public class Config
     public boolean createConfig() throws IOException
     {
         File dir = new File(Datos.CARPETA_PLUGIN);
-        File conf = new File(dir.getPath()+name);
+        File conf = new File(dir.getPath(), name);
         if (dir.exists())
         {
-            if(!conf.exists())
+            if (!conf.exists())
             {
             	new FileWriter(conf).close();
             	load();

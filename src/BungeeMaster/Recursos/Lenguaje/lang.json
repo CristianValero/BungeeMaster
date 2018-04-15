@@ -63,5 +63,25 @@
   {
     "en": "&b(!) All configurations have been loaded.",
     "es": "&b(!) Todas las configs han sido cargadas."
+  },
+  "13":
+  {
+    "en": "&aThe module ( %modulename% ) has been activated correctly.",
+    "es": "&aEl módulo ( %modulename% ) ha sido activado correctamente."
+  },
+  "14":
+  {
+    "en": "&aThe module ( %modulename% ) has been disabled correctly.",
+    "es": "&aEl módulo ( %modulename% ) ha sido desactivado correctamente."
+  },
+  "15":
+  {
+    "en": "&c&l%servername%\n&7You must join the server with this IP: &b%serverdomain%&7.",
+    "es": "&c&l%servername%\n&7Debes entrar con la dirección IP original: &b%serverdomain%&7."
+  },
+  "16":
+  {
+    "en": "&cAn error has ocurred when tryed to create the config file from %modulename%.",
+    "es": "&cHa ocurrido un error al intentar crear la configuracíon de %modulename%."
   }
 }

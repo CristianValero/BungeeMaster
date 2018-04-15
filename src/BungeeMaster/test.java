@@ -1,6 +1,5 @@
 package BungeeMaster;
 
-import BungeeMaster.Recursos.Datos;
 import BungeeMaster.Recursos.JsonSimple.JSONObject;
 import BungeeMaster.Recursos.JsonSimple.parser.JSONParser;
 import BungeeMaster.Recursos.JsonSimple.parser.ParseException;

@@ -17,12 +17,14 @@ public abstract class Modulo implements Listener
     {
     	getPlugin().registerListener(this);
     	setActivado(true);
+        getPlugin().console(getPlugin().getMensajes().get(13, getPlugin().getIdiomaConsola()).replace("%modulename%", getNombre()));
 	}
 
     public void finalizar()
     {
         getPlugin().unregisterListener(this);
         setActivado(false);
+        getPlugin().console(getPlugin().getMensajes().get(14, getPlugin().getIdiomaConsola()).replace("%modulename%", getNombre()));
 	}
 
     public final String getNombre()

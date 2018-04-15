@@ -7,7 +7,7 @@ public class Datos
 
     public static final String PERMISO_ADMIN = "bungeemaster.admin";
 
-    public static final int MENSAJES_CARGADOS = 12;
+    public static final int MENSAJES_CARGADOS = 16;
 
     /** RUTAS DE LA CONFIG */
     public static final String CONFIG_PROPIEDADES_SERVIDOR = "propiedades.servidor";

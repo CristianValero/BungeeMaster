@@ -17,9 +17,7 @@ public class JoinDomain extends Modulo
     {
         if (!isActivado())
         {
-            getPlugin().console("&eIniciando modulo: "+getNombre());
-
-            setActivado(true);
+            super.iniciar();
         }
     }
 
@@ -28,15 +26,19 @@ public class JoinDomain extends Modulo
     {
         if (!e.getConnection().getVirtualHost().getHostName().equals(getPlugin().getDominio()))
         {
+            final String dominio = getPlugin().getDominio();
+            final String nombreServidor = getPlugin().getNetworkName();
+            String kickReason = getPlugin().getMensajes().get(15, "en").replace("%servername%", nombreServidor);
+            kickReason = kickReason.replace("%serverdomain%", dominio);
+
             e.setCancelled(true); //Denegamos el acceso al Servidor
-            e.setCancelReason(); //Establecemos un mensaje de kick
+            e.setCancelReason(kickReason); //Establecemos un mensaje de kick
         }
     }
 
     @Override
     public void finalizar()
     {
-        getPlugin().console("&cDesactivando modulo: "+getNombre());
-        setActivado(false);
+        super.finalizar();
     }
 }
