@@ -56,14 +56,10 @@ public class BungeeMaster extends Plugin
     public void onEnable()
     {
         modulos = new Modulo[]
-                {
-                        new JoinDomain(this),
-                        new ServerMotd(this)
-                };
-
-        console("&e------------------------------------------");
-        console("&e------------- [BungeeMaster] -------------");
-        console("&e------------------------------------------");
+        {
+			new JoinDomain(this),
+			new ServerMotd(this)
+        };
 
         try
         {
