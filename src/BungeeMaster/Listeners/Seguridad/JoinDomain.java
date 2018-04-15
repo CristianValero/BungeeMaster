@@ -28,11 +28,13 @@ public class JoinDomain extends Modulo
         {
             final String dominio = getPlugin().getDominio();
             final String nombreServidor = getPlugin().getNetworkName();
-            String kickReason = getPlugin().getMensajes().get(15, "en").replace("%servername%", nombreServidor);
+            String kickReason = getPlugin().getMensajes().get(15, getPlugin().getIdiomaConsola()).replace("%servername%", nombreServidor);
             kickReason = kickReason.replace("%serverdomain%", dominio);
 
             e.setCancelled(true); //Denegamos el acceso al Servidor
             e.setCancelReason(kickReason); //Establecemos un mensaje de kick
+
+            getPlugin().console(18);
         }
     }
 
