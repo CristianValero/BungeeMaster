@@ -19,13 +19,13 @@ public class Mensajes
 	
 	public Mensajes()
 	{
-		lista = new ArrayList<Traducciones>();
-		idiomas = new Lista<String>();
+		this.lista = new ArrayList<Traducciones>();
+		this.idiomas = new Lista<String>();
 	}
 	
 	public void cargar() throws IOException, ParseException
 	{
-		InputStream is = getClass().getResourceAsStream("lang.json");
+		InputStream is = getClass().getResourceAsStream(Datos.LANG_JSON_PATH);
         InputStreamReader isr = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(isr);
 
@@ -96,7 +96,7 @@ public class Mensajes
 				if (mensaje.getIdioma().equals(idioma))
 					return mensaje.toString();
 			}
-			return idioma;
+			return "";
 		}
 	}
 }
