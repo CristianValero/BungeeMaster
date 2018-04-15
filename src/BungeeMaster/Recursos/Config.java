@@ -47,7 +47,7 @@ public class Config
 
     public void save() throws IOException
     {
-        ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuracion, new File(Datos.CARPETA_PLUGIN+name));
+        ConfigurationProvider.getProvider(clase).save(configuracion, new File(Datos.CARPETA_PLUGIN+name));
     }
 
     public List<?> getList(String path)
