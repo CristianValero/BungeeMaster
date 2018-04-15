@@ -18,36 +18,30 @@ public class Config
 
     public Config(String name)
     {
-    	configuracion = null;
+    	this.configuracion = null;
         this.name = name;
     }
 
     public boolean createConfig() throws IOException
     {
+    	boolean arr = false;
+    	
         File dir = new File(Datos.CARPETA_PLUGIN);
         File conf = new File(dir.getPath(), name);
         if (dir.exists())
         {
             if (!conf.exists())
-            {
             	new FileWriter(conf).close();
-            	load();
-            	return false;
-            }
             else
-            {
-            	load();
-            	return true;
-            }
+            	arr =  true;
         }
         else
         {
         	dir.mkdir();
             new FileWriter(conf).close();
-            load();
-            save();
-            return false;
         }
+        load();
+        return arr;
     }
     
     public void load() throws IOException
