@@ -19,7 +19,7 @@ public class Config
     public Config(String name)
     {
     	this.configuracion = null;
-        this.name = name;
+        this.name = name+".yml";
     }
 
     public boolean createConfig() throws IOException
