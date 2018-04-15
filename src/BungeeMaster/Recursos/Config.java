@@ -11,34 +11,38 @@ import java.util.List;
 
 public class Config
 {
-    private Configuration configuracion = null;
-    private String name = null;
+	private static final Class<YamlConfiguration> clase = YamlConfiguration.class;
+	
+    private Configuration configuracion;
+    private String name;
 
     public Config(String name)
     {
+    	configuracion = null;
         this.name = name;
     }
 
-    public void load() throws IOException
-    {
-        configuracion = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(Datos.CARPETA_PLUGIN+name));
-    }
-
-    public void createConfig() throws IOException
+    public boolean createConfig() throws IOException
     {
         File conf = new File(Datos.CARPETA_PLUGIN);
-        if (!conf.exists())
+        if (conf.exists())
         {
-            conf.mkdir();
-            new FileWriter(Datos.CARPETA_PLUGIN+name);
-            configuracion = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(Datos.CARPETA_PLUGIN+name));
-            ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuracion, new File(Datos.CARPETA_PLUGIN+name));
+            load();
+            return true;
+        }
+        else
+        {
+        	conf.mkdir();
+            new FileWriter(Datos.CARPETA_PLUGIN+name).close();
+            load();
+            save();
+            return false;
         }
     }
-
-    public boolean exists()
+    
+    public void load() throws IOException
     {
-        return new File(Datos.CARPETA_PLUGIN).exists();
+        configuracion = ConfigurationProvider.getProvider(clase).load(new File(Datos.CARPETA_PLUGIN+name));
     }
 
     public void save() throws IOException

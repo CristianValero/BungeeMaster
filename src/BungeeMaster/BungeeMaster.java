@@ -10,27 +10,29 @@ import BungeeMaster.Recursos.JsonSimple.JSONObject;
 import BungeeMaster.Recursos.JsonSimple.parser.JSONParser;
 import BungeeMaster.Recursos.JsonSimple.parser.ParseException;
 import BungeeMaster.Recursos.Lenguaje.Mensajes;
+import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.*;
-import java.sql.SQLException;
 
 public class BungeeMaster extends Plugin
 {
-    private Modulo[] modulos = null;
-    private BBDD bd = null;
-
+    private Modulo[] modulos;
+    private BBDD bd;
     private Config config;
-
-    public String NETWORK_NAME = null;
-    public String DOMINIO = null;
-    public String IDIOMA_CONSOLA = "ES";
+    private String NETWORK_NAME;
+    private String DOMINIO;
+    private String IDIOMA_CONSOLA;
     
     public BungeeMaster()
     {
 		super();
+		config = new Config(Datos.CONFIG_NAME);
+		NETWORK_NAME = null;
+	    DOMINIO = null;
+	    IDIOMA_CONSOLA = "ES";
 	}
 
 	@Override
@@ -65,13 +67,57 @@ public class BungeeMaster extends Plugin
 
         try
         {
-			configes();
-			iniciarModulos();
+        	if(config.createConfig())
+            {
+            	bd = new BBDD
+    			(
+    				config.getString(Datos.CONFIG_MYSQL_HOST),
+    				config.getInteger(Datos.CONFIG_MYSQL_PUERTO),
+    				config.getString(Datos.CONFIG_MYSQL_NOMBRE),
+    				config.getString(Datos.CONFIG_MYSQL_USUARIO),
+    				config.getString(Datos.CONFIG_MYSQL_CONTRA),
+    				config.getString(Datos.CONFIG_MYSQL_PREFIX)
+    			);
+    	        //bd.conectar();
+
+    	        NETWORK_NAME = config.getString(Datos.CONFIG_PROPIEDADES_SERVIDOR);
+    	        DOMINIO = config.getString(Datos.CONFIG_PROPIEDADES_DOMINIO);
+    	        IDIOMA_CONSOLA = config.getString(Datos.CONFIG_LENG_CONSOLA);
+    	        
+    	        console(10);
+    	        for (Modulo m : modulos)
+    	        {
+    	            String path = "modulos."+m.getNombre();
+    	            if (config.getObject(path) == null)
+    	                config.setData(path, false);
+    	            else
+    	            	if (config.getBoolean(path))
+    	            		m.iniciar();
+    	        }
+    	        console(11);
+            }
+            else
+            {
+                config.setData(Datos.CONFIG_PROPIEDADES_SERVIDOR, "NOMBRESERVIDOR");
+                config.setData(Datos.CONFIG_PROPIEDADES_DOMINIO, "mc.nombreservidor.com");
+                config.setData(Datos.CONFIG_LENG_CONSOLA, "es");
+
+                config.setData(Datos.CONFIG_MYSQL_HOST, "169.0.0.1");
+                config.setData(Datos.CONFIG_MYSQL_PUERTO, 3306);
+                config.setData(Datos.CONFIG_MYSQL_NOMBRE, "minecraft");
+                config.setData(Datos.CONFIG_MYSQL_USUARIO, "root");
+                config.setData(Datos.CONFIG_MYSQL_CONTRA, "123abc");
+                config.setData(Datos.CONFIG_MYSQL_PREFIX, "nameserver_");
+
+                config.save();
+            }
+            
+            console(12);
 			//getProxy().getPluginManager().registerCommand(this, new ModuleCommand(this,"Modulo", Datos.PERMISO_ADMIN, "modulo", "module", "mdle", "md"));
 		}
-        catch (ClassNotFoundException e){ e.printStackTrace(); }
-        catch (IOException e){ e.printStackTrace(); }
-        catch (SQLException e){ e.printStackTrace(); }
+        catch (ClassNotFoundException e){ e.printStackTrace(); BungeeCord.getInstance().stop(); }
+        catch (IOException e){ e.printStackTrace(); BungeeCord.getInstance().stop(); }
+        //catch (SQLException e){ e.printStackTrace(); BungeeCord.getInstance().stop(); }
     }
 
     @Override
@@ -101,77 +147,6 @@ public class BungeeMaster extends Plugin
         }
     }
 
-    public Modulo getModulo(String name)
-    {
-        for (Modulo modulo : modulos)
-            if (modulo.getNombre().equals(name))
-            	return modulo;
-        return null;
-    }
-
-    private void configes() throws ClassNotFoundException, IOException, SQLException
-    {
-        config = new Config(Datos.CONFIG_NAME);
-
-        if (!config.exists())
-        {
-            config.createConfig();
-
-            config.setData(Datos.CONFIG_PROPIEDADES_SERVIDOR, "NOMBRESERVIDOR");
-            config.setData(Datos.CONFIG_PROPIEDADES_DOMINIO, "mc.nombreservidor.com");
-            config.setData(Datos.CONFIG_LENG_CONSOLA, "es");
-
-            config.setData(Datos.CONFIG_MYSQL_HOST, "169.0.0.1");
-            config.setData(Datos.CONFIG_MYSQL_PUERTO, 3306);
-            config.setData(Datos.CONFIG_MYSQL_NOMBRE, "minecraft");
-            config.setData(Datos.CONFIG_MYSQL_USUARIO, "root");
-            config.setData(Datos.CONFIG_MYSQL_CONTRA, "123abc");
-            config.setData(Datos.CONFIG_MYSQL_PREFIX, "nameserver_");
-
-            config.save();
-
-            //BungeeCord.getInstance().stop();
-        }
-
-        config.load();
-
-        bd = new BBDD
-		(
-			config.getString(Datos.CONFIG_MYSQL_HOST),
-			config.getInteger(Datos.CONFIG_MYSQL_PUERTO),
-			config.getString(Datos.CONFIG_MYSQL_NOMBRE),
-			config.getString(Datos.CONFIG_MYSQL_USUARIO),
-			config.getString(Datos.CONFIG_MYSQL_CONTRA),
-			config.getString(Datos.CONFIG_MYSQL_PREFIX)
-		);
-        //bd.conectar();
-
-        NETWORK_NAME = config.getString(Datos.CONFIG_PROPIEDADES_SERVIDOR);
-        DOMINIO = config.getString(Datos.CONFIG_PROPIEDADES_DOMINIO);
-        IDIOMA_CONSOLA = config.getString(Datos.CONFIG_LENG_CONSOLA);
-        
-        console(Mensajes.getMensaje(12).get(IDIOMA_CONSOLA));
-    }
-
-	private void iniciarModulos() throws IOException
-    {
-        console(Mensajes.getMensaje(10).get(IDIOMA_CONSOLA));
-        
-        for (Modulo m : modulos)
-        {
-            String path = "modulos."+m.getNombre();
-            if (config.getObject(path) == null)
-                config.setData(path, false);
-            else
-            {
-            	if (config.getBoolean(path))
-            		m.iniciar();
-            }
-        }
-
-        console(Mensajes.getMensaje(11).get(IDIOMA_CONSOLA));
-    }
-
     private void pararModulos()
     {
         console("&c(!) Todos los modulos van a ser desactivados.");
@@ -180,14 +155,32 @@ public class BungeeMaster extends Plugin
                 m.finalizar();
     }
 
-    public void console(String msg)
+    public void console(Object msg)
     {
-        getLogger().info("[" + NETWORK_NAME + "] "+ ChatColor.translateAlternateColorCodes('&', msg));
+        getLogger().info("[" + NETWORK_NAME + "] "+ ChatColor.translateAlternateColorCodes('&', msg.toString()));
+    }
+    
+    public void console(int num)
+    {
+        console(Mensajes.getMensaje(num).get(IDIOMA_CONSOLA));
+    }
+    
+    public Modulo getModulo(String name)
+    {
+        for (Modulo modulo : modulos)
+            if (modulo.getNombre().equals(name))
+            	return modulo;
+        return null;
     }
 
     public String getNetworkName()
     {
         return NETWORK_NAME;
+    }
+    
+    public String getDominio()
+    {
+        return DOMINIO;
     }
     
     public void registerListener(Listener listener)
