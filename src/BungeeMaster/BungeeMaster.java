@@ -63,7 +63,7 @@ public class BungeeMaster extends Plugin
 
         try
         {
-        	if(config.createConfig())
+        	if (config.createConfig())
             {
             	bd = new BBDD
     			(
