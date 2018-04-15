@@ -6,8 +6,6 @@ import BungeeMaster.Listeners.Seguridad.JoinDomain;
 import BungeeMaster.Listeners.Servidor.ServerMotd;
 import BungeeMaster.Recursos.Config;
 import BungeeMaster.Recursos.Datos;
-import BungeeMaster.Recursos.JsonSimple.JSONObject;
-import BungeeMaster.Recursos.JsonSimple.parser.JSONParser;
 import BungeeMaster.Recursos.JsonSimple.parser.ParseException;
 import BungeeMaster.Recursos.Lenguaje.Mensajes;
 import net.md_5.bungee.BungeeCord;
@@ -135,7 +133,7 @@ public class BungeeMaster extends Plugin
 
     private void pararModulos()
     {
-        console("&c(!) Todos los modulos van a ser desactivados.");
+        console(17);
         for (Modulo m : modulos)
             if (m.isActivado())
                 m.finalizar();

@@ -83,5 +83,10 @@
   {
     "en": "&cAn error has ocurred when tryed to create the config file from %modulename%.",
     "es": "&cHa ocurrido un error al intentar crear la configuracíon de %modulename%."
+  },
+  "17":
+  {
+    "en": "&c(!) All modules are going to be disabled.",
+    "es": "&c(!) Todos los modulos van a ser desactivados."
   }
 }
