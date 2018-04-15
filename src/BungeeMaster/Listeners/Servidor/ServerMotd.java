@@ -1,6 +1,8 @@
 package BungeeMaster.Listeners.Servidor;
 
+import java.awt.List;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.UUID;
 
 import BungeeMaster.BungeeMaster;
@@ -58,19 +60,9 @@ public class ServerMotd extends Modulo
 				samples[i] = new ServerPing.PlayerInfo(ChatColor.GOLD+"AAAAAAAA", EMPTY_UUID);
 			}
 	    	ppp.setSample(samples);
-	    	ppp.setSample(new ServerPing.PlayerInfo[]
-			{
-				new ServerPing.PlayerInfo(ChatColor.GOLD+"AAAAAAAA", EMPTY_UUID),
-				new ServerPing.PlayerInfo(ChatColor.BLUE+"------------------------------------", EMPTY_UUID),
-				new ServerPing.PlayerInfo(ChatColor.RED+"BBBBBBBBBB", EMPTY_UUID),
-				new ServerPing.PlayerInfo(ChatColor.RED+"BBBBBBBBBB", EMPTY_UUID),
-				new ServerPing.PlayerInfo(ChatColor.RED+"BBBBBBBBBB", EMPTY_UUID),
-				new ServerPing.PlayerInfo(ChatColor.RED+"BBBBBBBBBB", EMPTY_UUID),
-				new ServerPing.PlayerInfo(ChatColor.RED+"BBBBBBBBBB", EMPTY_UUID),
-				new ServerPing.PlayerInfo(ChatColor.RED+"BBBBBBBBBB", EMPTY_UUID)
-			});
 
-	    	ping.setVersion(new Protocol("§b§l» §6"+ping.getPlayers().getOnline()+"§f/§6"+ping.getPlayers().getMax(), 3));
+	    	if(custom_slots)
+	    		ping.setVersion(new Protocol("§b§l» §6"+ping.getPlayers().getOnline()+"§f/§6"+ping.getPlayers().getMax(), 1));
 
 	    	ping.setDescription("holis"); //Motd
         }
@@ -93,7 +85,14 @@ public class ServerMotd extends Modulo
 
 	private void crearConfig()
 	{
-		config.setData("general.max", "");
+		LinkedList<String> aux = new LinkedList<String>();
+		aux.add("holis");
+		aux.add(" asdf asdf a9so2 0edsopo ss");
+		
+		
+		config.setData("general.hover", "false");
+		config.setData("general.custom_slots", "false");
+		config.setData("prueba", aux);
 	}
 
 	@Override
