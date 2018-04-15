@@ -26,7 +26,7 @@ public class JoinDomain extends Modulo
     @EventHandler
     public void alEntrar(LoginEvent e)
     {
-        if (!e.getConnection().getVirtualHost().getHostName().equals(getPlugin().DOMINIO))
+        if (!e.getConnection().getVirtualHost().getHostName().equals(getPlugin().getDominio()))
         {
             e.setCancelled(true); //Denegamos el acceso al Servidor
             e.setCancelReason(); //Establecemos un mensaje de kick

@@ -95,6 +95,8 @@ public class BungeeMaster extends Plugin
     	            		m.iniciar();
     	        }
     	        console(11);
+    	        console(12);
+    	        //getProxy().getPluginManager().registerCommand(this, new ModuleCommand(this,"Modulo", Datos.PERMISO_ADMIN, "modulo", "module", "mdle", "md"));
             }
             else
             {
@@ -112,9 +114,6 @@ public class BungeeMaster extends Plugin
                 config.save();
                 BungeeCord.getInstance().stop();
             }
-            
-            console(12);
-			//getProxy().getPluginManager().registerCommand(this, new ModuleCommand(this,"Modulo", Datos.PERMISO_ADMIN, "modulo", "module", "mdle", "md"));
 		}
         catch (ClassNotFoundException e){ e.printStackTrace(); BungeeCord.getInstance().stop(); }
         catch (IOException e){ e.printStackTrace(); BungeeCord.getInstance().stop(); }
