@@ -21,5 +21,5 @@ public class Datos
     public static final String CONFIG_MYSQL_CONTRA = "mysql.pass";
     public static final String CONFIG_MYSQL_PREFIX = "mysql.prefix";
 
-    public static final String LANG_JSON_PATH = "Recursos/Lenguaje/lang.json";
+    public static final String LANG_JSON_PATH = "lang.json";
 }
