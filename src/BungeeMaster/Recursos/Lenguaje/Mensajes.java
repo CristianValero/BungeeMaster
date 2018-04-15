@@ -96,7 +96,7 @@ public class Mensajes
 		{
 			for (Mensaje mensaje : mensajes)
 			{
-				if (mensaje.getIdioma().equals(idioma))
+				if (mensaje.getIdioma().equalsIgnoreCase(idioma))
 					return mensaje.toString();
 			}
 			return "";

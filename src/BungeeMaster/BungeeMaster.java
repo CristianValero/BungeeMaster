@@ -120,7 +120,6 @@ public class BungeeMaster extends Plugin
                 config.save();
 
                 console(12);
-
                 BungeeCord.getInstance().stop();
             }
 		}
