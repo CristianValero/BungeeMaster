@@ -10,7 +10,6 @@ import BungeeMaster.Recursos.JsonSimple.JSONObject;
 import BungeeMaster.Recursos.JsonSimple.parser.JSONParser;
 import BungeeMaster.Recursos.JsonSimple.parser.ParseException;
 import BungeeMaster.Recursos.Lenguaje.Mensajes;
-import BungeeMaster.Recursos.Lenguaje.Mensajes2;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.plugin.Listener;
@@ -26,14 +25,14 @@ public class BungeeMaster extends Plugin
     private String NETWORK_NAME;
     private String DOMINIO;
     private String IDIOMA_CONSOLA;
-    private Mensajes2 mensajes;
+    private Mensajes mensajes;
     
     public BungeeMaster()
     {
 		super();
 		config = new Config(Datos.CONFIG_NAME);
 		
-		mensajes = new Mensajes2();
+		mensajes = new Mensajes();
 		mensajes.addIdioma("es");
 		mensajes.addIdioma("en");
 		
@@ -48,7 +47,6 @@ public class BungeeMaster extends Plugin
         try
         {
         	mensajes.cargar();
-            //cargarMensajes();
         }
         catch (IOException e)
         {
@@ -129,26 +127,6 @@ public class BungeeMaster extends Plugin
     {
         pararModulos();
         if(bd != null) bd.desconectar();
-    }
-
-    private void cargarMensajes() throws IOException, ParseException
-    {
-        InputStream is = test.class.getResourceAsStream(Datos.LANG_JSON_PATH);
-        InputStreamReader isr = new InputStreamReader(is);
-        BufferedReader br = new BufferedReader(isr);
-
-        JSONParser parser = new JSONParser();
-        Object o = parser.parse(br);
-        JSONObject object = (JSONObject) o;
-
-        for (int i=0; i<=Datos.MENSAJES_CARGADOS; i++)
-        {
-            JSONObject msg = (JSONObject) object.get(String.valueOf(i));
-            String en = (String) msg.get("en");
-            String es = (String) msg.get("es");
-
-            new Mensajes(i, en, es);
-        }
     }
 
     private void pararModulos()
