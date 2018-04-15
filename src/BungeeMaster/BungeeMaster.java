@@ -36,7 +36,7 @@ public class BungeeMaster extends Plugin
 		
 		NETWORK_NAME = null;
 	    DOMINIO = null;
-	    IDIOMA_CONSOLA = "ES";
+	    IDIOMA_CONSOLA = "es";
 	}
 
 	@Override
@@ -97,6 +97,8 @@ public class BungeeMaster extends Plugin
             }
             else
             {
+                IDIOMA_CONSOLA = "en";
+
                 config.setData(Datos.CONFIG_PROPIEDADES_SERVIDOR, "NOMBRESERVIDOR");
                 config.setData(Datos.CONFIG_PROPIEDADES_DOMINIO, "mc.nombreservidor.com");
                 config.setData(Datos.CONFIG_LENG_CONSOLA, "es");
@@ -116,6 +118,9 @@ public class BungeeMaster extends Plugin
     	        }
 
                 config.save();
+
+                console(12);
+
                 BungeeCord.getInstance().stop();
             }
 		}
