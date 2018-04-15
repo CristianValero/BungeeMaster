@@ -48,5 +48,20 @@
   {
     "en": "§a§lYES\n\n§7Click for §aaccept §7the action",
     "es": "§a§lSI\n\n§7Click para §aaceptar §7la acción."
+  },
+  "10":
+  {
+    "en": "&b(!) All ready to start modules.",
+    "es": "&b(!) Listo para iniciar los modulos."
+  },
+  "11":
+  {
+    "en": "&b(!) All modlues have been iniciated, check console for possible errors.",
+    "es": "&b(!) Todos los modulos han sido iniciados, revisar consola en caso de error."
+  },
+  "12":
+  {
+    "en": "&b(!) All configurations have been loaded.",
+    "es": "&b(!) Todas las configs han sido cargadas."
   }
 }
