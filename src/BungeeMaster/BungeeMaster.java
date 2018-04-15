@@ -135,7 +135,7 @@ public class BungeeMaster extends Plugin
 
         for (int i=0; i<Datos.MENSAJES_CARGADOS; i++)
         {
-            JSONObject msg = (JSONObject) object.get(i);
+            JSONObject msg = (JSONObject) object.get(String.valueOf(i));
             String en = (String) msg.get("en");
             String es = (String) msg.get("es");
 
