@@ -1,6 +1,5 @@
 package BungeeMaster.Listeners.Servidor;
 
-import java.awt.List;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.UUID;
@@ -83,16 +82,24 @@ public class ServerMotd extends Modulo
 		catch(IOException ex) {}
 	}
 
-	private void crearConfig()
+	private void crearConfig() throws IOException
 	{
-		LinkedList<String> aux = new LinkedList<String>();
-		aux.add("holis");
-		aux.add(" asdf asdf a9so2 0edsopo ss");
+		LinkedList<String> descripcion = new LinkedList<String>();
+		descripcion.add("Descripcion 1");
+		descripcion.add("Descripcion 2");
+		
+		LinkedList<String> hover = new LinkedList<String>();
+		hover.add("Hover 1");
+		hover.add("Hover 2");
 		
 		
-		config.setData("general.hover", "false");
-		config.setData("general.custom_slots", "false");
-		config.setData("prueba", aux);
+		config.setData("properties.hover", false);
+		config.setData("properties.custom_slots", false);
+		
+		config.setData("description", descripcion);
+		config.setData("hover", hover);
+		
+		config.save();
 	}
 
 	@Override

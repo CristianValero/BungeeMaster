@@ -8,9 +8,9 @@ public class Datos
     public static final String PERMISO_ADMIN = "bungeemaster.admin";
 
     /** RUTAS DE LA CONFIG */
-    public static final String CONFIG_PROPIEDADES_SERVIDOR = "propiedades.servidor";
-    public static final String CONFIG_PROPIEDADES_DOMINIO = "propiedades.dominio";
-    public static final String CONFIG_LENG_CONSOLA = "propiedades.idioma_consola";
+    public static final String CONFIG_PROPIEDADES_SERVIDOR = "properties.servidor";
+    public static final String CONFIG_PROPIEDADES_DOMINIO = "properties.dominio";
+    public static final String CONFIG_LENG_CONSOLA = "properties.idioma_consola";
 
     public static final String CONFIG_MYSQL_HOST = "mysql.host";
     public static final String CONFIG_MYSQL_PUERTO = "mysql.port";
