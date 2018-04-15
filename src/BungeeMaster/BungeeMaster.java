@@ -110,6 +110,7 @@ public class BungeeMaster extends Plugin
                 config.setData(Datos.CONFIG_MYSQL_PREFIX, "nameserver_");
 
                 config.save();
+                BungeeCord.getInstance().stop();
             }
             
             console(12);
