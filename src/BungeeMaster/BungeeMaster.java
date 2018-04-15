@@ -90,11 +90,8 @@ public class BungeeMaster extends Plugin
     	        for (Modulo m : modulos)
     	        {
     	            String path = "modulos."+m.getNombre();
-    	            if (config.getObject(path) == null)
-    	                config.setData(path, false);
-    	            else
-    	            	if (config.getBoolean(path))
-    	            		m.iniciar();
+    	            if (config.getObject(path) != null && config.getBoolean(path))
+    	                m.iniciar();
     	        }
     	        console(11);
     	        console(12);

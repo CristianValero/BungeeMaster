@@ -13,6 +13,7 @@ import net.md_5.bungee.event.EventHandler;
 @SuppressWarnings("deprecation")
 public class ServerMotd extends Modulo
 {
+	
     public ServerMotd(BungeeMaster p)
     {
 		super(p);
