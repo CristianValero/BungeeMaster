@@ -125,7 +125,7 @@ public class BungeeMaster extends Plugin
 
     private void cargarMensajes() throws IOException, ParseException
     {
-        InputStream is = test.class.getResourceAsStream("Recursos/Lenguaje/lang.json");
+        InputStream is = test.class.getResourceAsStream(Datos.LANG_JSON_PATH);
         InputStreamReader isr = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(isr);
 
