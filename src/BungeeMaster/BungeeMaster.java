@@ -10,6 +10,7 @@ import BungeeMaster.Recursos.JsonSimple.JSONObject;
 import BungeeMaster.Recursos.JsonSimple.parser.JSONParser;
 import BungeeMaster.Recursos.JsonSimple.parser.ParseException;
 import BungeeMaster.Recursos.Lenguaje.Mensajes;
+import BungeeMaster.Recursos.Lenguaje.Mensajes2;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.plugin.Listener;
@@ -25,11 +26,17 @@ public class BungeeMaster extends Plugin
     private String NETWORK_NAME;
     private String DOMINIO;
     private String IDIOMA_CONSOLA;
+    private Mensajes2 mensajes;
     
     public BungeeMaster()
     {
 		super();
 		config = new Config(Datos.CONFIG_NAME);
+		
+		mensajes = new Mensajes2();
+		mensajes.addIdioma("es");
+		mensajes.addIdioma("en");
+		
 		NETWORK_NAME = null;
 	    DOMINIO = null;
 	    IDIOMA_CONSOLA = "ES";
@@ -40,7 +47,8 @@ public class BungeeMaster extends Plugin
     {
         try
         {
-            cargarMensajes();
+        	mensajes.cargar();
+            //cargarMensajes();
         }
         catch (IOException e)
         {
@@ -158,7 +166,7 @@ public class BungeeMaster extends Plugin
     
     public void console(int num)
     {
-        console(Mensajes.getMensaje(num).get(IDIOMA_CONSOLA));
+        console(mensajes.get(num, IDIOMA_CONSOLA));
     }
     
     public Modulo getModulo(String name)
