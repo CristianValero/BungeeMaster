@@ -153,7 +153,7 @@ public class BungeeMaster extends Plugin
 
     public void console(Object msg)
     {
-        getLogger().info("[" + NETWORK_NAME + "] "+ ChatColor.translateAlternateColorCodes('&', msg.toString()));
+        getLogger().info(ChatColor.translateAlternateColorCodes('&', msg.toString()));
     }
     
     public void console(int num)
