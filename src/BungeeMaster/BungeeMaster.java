@@ -141,6 +141,14 @@ public class BungeeMaster extends Plugin
                 m.finalizar();
     }
 
+    public Mensajes getMensajes() {
+        return mensajes;
+    }
+
+    public String getIdiomaConsola() {
+        return IDIOMA_CONSOLA;
+    }
+
     public void console(Object msg)
     {
         getLogger().info(ChatColor.translateAlternateColorCodes('&', msg.toString()));
