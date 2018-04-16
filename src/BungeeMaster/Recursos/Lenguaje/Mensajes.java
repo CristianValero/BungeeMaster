@@ -38,7 +38,7 @@ public class Mensajes
 			msg = (JSONObject) object.get(String.valueOf(contador));
 			Traducciones aux = new Traducciones();
 			for (String idioma : idiomas)
-				aux.add(new Mensaje(idioma, (String)msg.get(idioma)));
+				aux.add(new Mensaje(idioma.toLowerCase(), (String)msg.get(idioma)));
 			lista.add(aux);
 
 			contador++;
