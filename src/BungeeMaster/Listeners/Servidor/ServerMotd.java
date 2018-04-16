@@ -1,17 +1,24 @@
 package BungeeMaster.Listeners.Servidor;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import BungeeMaster.BungeeMaster;
 import BungeeMaster.Listeners.Modulo;
 import BungeeMaster.Recursos.Config;
+import net.md_5.bungee.api.Callback;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.ServerPing.Protocol;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.config.ListenerInfo;
+import net.md_5.bungee.api.event.AsyncEvent;
 import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.event.EventHandler;
 
@@ -36,24 +43,46 @@ public class ServerMotd extends Modulo
 		this.custom_slots = "";
 		this.descripcion = new String[2];
 		this.hoverdescrp = new ArrayList<String>();
+		
+		/*callback = new Callback<ProxyPingEvent>()
+		{
+            @Override
+            public void done(ProxyPingEvent event, Throwable throwable)
+            {
+                event.getResponse().setDescription("holiz");
+            }
+        };
+        
+        bungeeCord.getScheduler().schedule(getPlugin(), new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                ServerPing ping = new ServerPing(new ServerPing.Protocol("protocolo 1", 2), new ServerPing.Players(10, 10, null), new TextComponent("hola"), null);
+                
+                bungeeCord.getPluginManager().callEvent(new ProxyPingEvent(scConnection, ping, callback));
+            }
+        }, 0L, 1L, java.util.concurrent.TimeUnit.SECONDS);*/
 	}
-
-	@EventHandler
+    
+    @EventHandler
     public void onProxyPingEvent(ProxyPingEvent event)
     {
     	ServerPing ping;
     	ServerPing.Players ppp;
     	ServerPing.PlayerInfo[] samples;
     	
+    	
         if (getPlugin() != null && ( ping=event.getResponse()) != null)
         {
 	    	ppp = event.getResponse().getPlayers();
 	    	
-	    	if(!custom_slots.isEmpty())
+	    	/*if(!custom_slots.isEmpty())
 	    		ping.setVersion(new Protocol(ChatColor.translateAlternateColorCodes('&', replace(custom_slots, ppp)), 1));
 
 	    	if(!descripcion[0].isEmpty() || !descripcion[1].isEmpty())
 	    		ping.setDescription(ChatColor.translateAlternateColorCodes('&', replace(descripcion[0], ppp)+(((descripcion[0]+descripcion[1]).isEmpty())?"":"&r"+'\n')+replace(descripcion[1], ppp)));
+	    	ping.setDescriptionComponent(new TextComponent("&3xx"));
 	    	
 	    	if(hover)
 	    	{
@@ -66,7 +95,7 @@ public class ServerMotd extends Modulo
 	    			i++;
 	    		}
 		    	ppp.setSample(samples);
-	    	}
+	    	}*/
 	    	
 	    	/*getPlugin().getProxy().getScheduler().schedule(getPlugin(), new Runnable()
 	    	{
@@ -75,9 +104,11 @@ public class ServerMotd extends Modulo
 				@Override
 				public void run()
 				{
-					ping.setDescription("a"+i);
+					ping.setDescriptionComponent(new TextComponent("&3"+i));
 					getPlugin().console(String.valueOf(i));
 					i++;
+					
+					event.setResponse(ping);
 				}
 			}, 1, 1, TimeUnit.SECONDS);*/
         }
@@ -133,7 +164,6 @@ public class ServerMotd extends Modulo
 	
 	private String replace(String cad, ServerPing.Players ppp)
 	{
-		getPlugin().getProxy();
 		return cad
 			.replaceAll("%online%", String.valueOf(ppp.getOnline()))
 			.replaceAll("%slots%", String.valueOf(ppp.getMax()))

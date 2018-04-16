@@ -51,18 +51,18 @@
   },
   "10":
   {
-    "en": "&b(!) All ready to start modules.",
-    "es": "&b(!) Listo para iniciar los modulos."
+    "en": "&bAll ready to start modules.",
+    "es": "&bListo para iniciar los modulos."
   },
   "11":
   {
-    "en": "&b(!) All modlues have been iniciated, check console for possible errors.",
-    "es": "&b(!) Todos los modulos han sido iniciados, revisar consola en caso de error."
+    "en": "&bAll modlues have been iniciated, check console for possible errors.",
+    "es": "&bTodos los modulos han sido iniciados, revisar consola en caso de error."
   },
   "12":
   {
-    "en": "&b(!) All configurations have been loaded.",
-    "es": "&b(!) Todas las configs han sido cargadas."
+    "en": "&bAll configurations have been loaded.",
+    "es": "&bTodas las configs han sido cargadas."
   },
   "13":
   {
@@ -86,12 +86,12 @@
   },
   "17":
   {
-    "en": "&c(!) All modules are going to be disabled.",
-    "es": "&c(!) Todos los modulos van a ser desactivados."
+    "en": "&cAll modules are going to be disabled.",
+    "es": "&cTodos los modulos van a ser desactivados."
   },
   "18":
   {
-    "en": "&c(!) Access denied to user %username% ( %ipplayer% ) user for trying to access the server with another server IP.",
-    "es": "&c(!) Se ha denegado el acceso al usuario %username ( %ipplayer% ) por intentar entrar con otra IP al servidor."
+    "en": "&cAccess denied to user %username% ( %ipplayer% ) user for trying to access the server with another server IP.",
+    "es": "&cSe ha denegado el acceso al usuario %username% ( %ipplayer% ) por intentar entrar con otra IP al servidor."
   }
 }
