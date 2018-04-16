@@ -194,15 +194,7 @@ public class BungeeMaster extends Plugin
 		return cad
 			.replaceAll("%online%", String.valueOf(getProxy().getOnlineCount()))
 			.replaceAll("%slots%", String.valueOf(getProxy().getOnlineCount()))
-			.replaceAll("%name%", String.valueOf(getNetworkName()));
-	}
-    
-    public String replace(String cad, PlayerInfo p)
-	{
-		return cad
-			.replaceAll("%online%", String.valueOf(getProxy().getOnlineCount()))
-			.replaceAll("%slots%", String.valueOf(getProxy().getOnlineCount()))
-			.replaceAll("%name%", String.valueOf(getNetworkName()));
+			.replaceAll("%name%", getNetworkName());
 	}
     
     public void registerListener(Listener listener)
