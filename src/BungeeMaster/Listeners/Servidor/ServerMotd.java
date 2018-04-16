@@ -77,11 +77,11 @@ public class ServerMotd extends Modulo
         {
 	    	ppp = event.getResponse().getPlayers();
 	    	
-	    	/*if(!custom_slots.isEmpty())
-	    		ping.setVersion(new Protocol(ChatColor.translateAlternateColorCodes('&', replace(custom_slots, ppp)), 1));
+	    	if(!custom_slots.isEmpty())
+	    		ping.setVersion(new Protocol(ChatColor.translateAlternateColorCodes('&', getPlugin().replace(custom_slots)), 1));
 
 	    	if(!descripcion[0].isEmpty() || !descripcion[1].isEmpty())
-	    		ping.setDescription(ChatColor.translateAlternateColorCodes('&', replace(descripcion[0], ppp)+(((descripcion[0]+descripcion[1]).isEmpty())?"":"&r"+'\n')+replace(descripcion[1], ppp)));
+	    		ping.setDescription(ChatColor.translateAlternateColorCodes('&', getPlugin().replace(descripcion[0])+(((descripcion[0]+descripcion[1]).isEmpty())?"":"&r"+'\n')+getPlugin().replace(descripcion[1])));
 	    	ping.setDescriptionComponent(new TextComponent("&3xx"));
 	    	
 	    	if(hover)
@@ -91,11 +91,11 @@ public class ServerMotd extends Modulo
 	    		int i = 0;
 	    		for (String cad : hoverdescrp)
 	    		{
-	    			samples[i] = new ServerPing.PlayerInfo(ChatColor.translateAlternateColorCodes('&', replace(cad, ppp)), EMPTY_UUID);
+	    			samples[i] = new ServerPing.PlayerInfo(ChatColor.translateAlternateColorCodes('&', getPlugin().replace(cad)), EMPTY_UUID);
 	    			i++;
 	    		}
 		    	ppp.setSample(samples);
-	    	}*/
+	    	}
 	    	
 	    	/*getPlugin().getProxy().getScheduler().schedule(getPlugin(), new Runnable()
 	    	{
@@ -162,23 +162,12 @@ public class ServerMotd extends Modulo
 		this.hoverdescrp = (ArrayList<String>) config.getStringList("hover");
 	}
 	
-	private String replace(String cad, ServerPing.Players ppp)
-	{
-		return cad
-			.replaceAll("%online%", String.valueOf(ppp.getOnline()))
-			.replaceAll("%slots%", String.valueOf(ppp.getMax()))
-			.replaceAll("%name%", String.valueOf(getPlugin().getNetworkName()));
-	}
-
 	@Override
 	public void finalizar()
 	{
 		super.finalizar();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "ServerMotd [hover=" + hover + ", custom_slots=" + custom_slots + ", EMPTY_UUID=" + EMPTY_UUID
