@@ -163,7 +163,7 @@ public class BungeeMaster extends Plugin
     
     public void console(int num)
     {
-        console(ChatColor.YELLOW, num);
+        console(ChatColor.RED, num);
     }
     
     public void console(ChatColor color, int num)
