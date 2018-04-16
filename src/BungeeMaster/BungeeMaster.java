@@ -87,6 +87,7 @@ public class BungeeMaster extends Plugin
     	        console(10);
     	        for (Modulo m : modulos)
     	        {
+    	        	m.crearConfig();
     	            String path = "modulos."+m.getNombre();
     	            if (config.getObject(path) != null && config.getBoolean(path))
     	                m.iniciar();
@@ -103,7 +104,7 @@ public class BungeeMaster extends Plugin
                 config.setData(Datos.CONFIG_PROPIEDADES_DOMINIO, "mc.nombreservidor.com");
                 config.setData(Datos.CONFIG_LENG_CONSOLA, "es");
 
-                config.setData(Datos.CONFIG_MYSQL_HOST, "169.0.0.1");
+                config.setData(Datos.CONFIG_MYSQL_HOST, "127.0.0.1");
                 config.setData(Datos.CONFIG_MYSQL_PUERTO, 3306);
                 config.setData(Datos.CONFIG_MYSQL_NOMBRE, "minecraft");
                 config.setData(Datos.CONFIG_MYSQL_USUARIO, "root");
@@ -112,6 +113,7 @@ public class BungeeMaster extends Plugin
                 
                 for (Modulo m : modulos)
     	        {
+                	m.crearConfig();
     	            String path = "modulos."+m.getNombre();
     	            if (config.getObject(path) == null)
     	                config.setData(path, false);

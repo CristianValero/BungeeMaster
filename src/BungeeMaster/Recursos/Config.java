@@ -58,6 +58,11 @@ public class Config
     {
         return configuracion.getList(path);
     }
+    
+    public List<String> getStringList(String path)
+    {
+        return configuracion.getStringList(path);
+    }
 
     public Object getObject(String path)
     {
@@ -83,5 +88,10 @@ public class Config
     {
         configuracion.set(path, data);
         return this;
+    }
+    
+    public Configuration prueba()
+    {
+    	return configuracion;
     }
 }

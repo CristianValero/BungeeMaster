@@ -1,14 +1,15 @@
 package BungeeMaster.Listeners.Servidor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.UUID;
 
 import BungeeMaster.BungeeMaster;
-import BungeeMaster.Librerias.Lista;
 import BungeeMaster.Listeners.Modulo;
 import BungeeMaster.Recursos.Config;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.ServerPing.Protocol;
 import net.md_5.bungee.api.event.ProxyPingEvent;
@@ -18,52 +19,67 @@ import net.md_5.bungee.event.EventHandler;
 public class ServerMotd extends Modulo
 {
 	private boolean hover;
-	private boolean custom_slots;
+	private String custom_slots;
 	private UUID EMPTY_UUID;
-	private Lista<String> descripcion;
-	private Lista<String> hoverdescrp;
+	private String[] descripcion;
+	private ArrayList<String> hoverdescrp;
 	private Config config;
 	
     public ServerMotd(BungeeMaster p)
     {
 		super(p);
 		
-		this.hover = false;
-		this.custom_slots = false;
 		this.EMPTY_UUID = UUID.fromString("0-0-0-0-0");
-		this.descripcion = new Lista<String>();
-		this.hoverdescrp = new Lista<String>();
 		this.config = new Config(getNombre());
+		
+		this.hover = false;
+		this.custom_slots = "";
+		this.descripcion = new String[2];
+		this.hoverdescrp = new ArrayList<String>();
 	}
 
 	@EventHandler
     public void onProxyPingEvent(ProxyPingEvent event)
     {
-		int max, online;
-		String server_name;
-		
     	ServerPing ping;
     	ServerPing.Players ppp;
-    	ServerPing.PlayerInfo[] samples = new ServerPing.PlayerInfo[4];
-
+    	ServerPing.PlayerInfo[] samples;
+    	
         if (getPlugin() != null && ( ping=event.getResponse()) != null)
         {
 	    	ppp = event.getResponse().getPlayers();
-	    	max = ppp.getMax();
-	    	online = ppp.getOnline();
-	    	server_name = getPlugin().getNetworkName();
 	    	
+	    	if(!custom_slots.isEmpty())
+	    		ping.setVersion(new Protocol(ChatColor.translateAlternateColorCodes('&', replace(custom_slots, ppp)), 1));
+
+	    	if(!descripcion[0].isEmpty() || !descripcion[1].isEmpty())
+	    		ping.setDescription(ChatColor.translateAlternateColorCodes('&', replace(descripcion[0], ppp)+(((descripcion[0]+descripcion[1]).isEmpty())?"":"&r"+'\n')+replace(descripcion[1], ppp)));
 	    	
-	    	for (int i = 0; i < 10; i++)
+	    	if(hover)
 	    	{
-				samples[i] = new ServerPing.PlayerInfo(ChatColor.GOLD+"AAAAAAAA", EMPTY_UUID);
-			}
-	    	ppp.setSample(samples);
-
-	    	if(custom_slots)
-	    		ping.setVersion(new Protocol("§b§l» §6"+ping.getPlayers().getOnline()+"§f/§6"+ping.getPlayers().getMax(), 1));
-
-	    	ping.setDescription("holis"); //Motd
+	    		samples = new ServerPing.PlayerInfo[hoverdescrp.size()];
+	    		
+	    		int i = 0;
+	    		for (String cad : hoverdescrp)
+	    		{
+	    			samples[i] = new ServerPing.PlayerInfo(ChatColor.translateAlternateColorCodes('&', replace(cad, ppp)), EMPTY_UUID);
+	    			i++;
+	    		}
+		    	ppp.setSample(samples);
+	    	}
+	    	
+	    	/*getPlugin().getProxy().getScheduler().schedule(getPlugin(), new Runnable()
+	    	{
+	    		int i = 0;
+	    		
+				@Override
+				public void run()
+				{
+					ping.setDescription("a"+i);
+					getPlugin().console(String.valueOf(i));
+					i++;
+				}
+			}, 1, 1, TimeUnit.SECONDS);*/
         }
     }
 
@@ -72,39 +88,70 @@ public class ServerMotd extends Modulo
 	{
 		try
 		{
+			crearConfig();
 			if(!isActivado())
 			{
 				super.iniciar();
-				if(!config.createConfig())
-					crearConfig();
+				leerConfig();
 			}
 		}
 		catch(IOException ex) {}
 	}
 
-	private void crearConfig() throws IOException
+	public void crearConfig() throws IOException
 	{
-		LinkedList<String> descripcion = new LinkedList<String>();
-		descripcion.add("Descripcion 1");
-		descripcion.add("Descripcion 2");
+		if(!config.createConfig())
+		{
+			LinkedList<String> hoverdescrp = new LinkedList<String>();
+			
+			hoverdescrp.add("Hover 1");
+			hoverdescrp.add("Hover 2");
+			
+			
+			config.setData("properties.hover", true);
+			config.setData("properties.custom_slots", "");
+			
+			config.setData("description.line1", "- Linea 1");
+			config.setData("description.line2", "- Linea 2");
+			
+			config.setData("hover", hoverdescrp);
+			
+			config.save();
+		}
+	}
+	
+	private void leerConfig()
+	{
+		this.hover = config.getBoolean("properties.hover");
+		this.custom_slots = config.getString("properties.custom_slots");
 		
-		LinkedList<String> hover = new LinkedList<String>();
-		hover.add("Hover 1");
-		hover.add("Hover 2");
+		this.descripcion[0] = config.getString("description.line1");
+		this.descripcion[1] = config.getString("description.line2");
 		
-		
-		config.setData("properties.hover", false);
-		config.setData("properties.custom_slots", false);
-		
-		config.setData("description", descripcion);
-		config.setData("hover", hover);
-		
-		config.save();
+		this.hoverdescrp = (ArrayList<String>) config.getStringList("hover");
+	}
+	
+	private String replace(String cad, ServerPing.Players ppp)
+	{
+		getPlugin().getProxy();
+		return cad
+			.replaceAll("%online%", String.valueOf(ppp.getOnline()))
+			.replaceAll("%slots%", String.valueOf(ppp.getMax()))
+			.replaceAll("%name%", String.valueOf(getPlugin().getNetworkName()));
 	}
 
 	@Override
 	public void finalizar()
 	{
 		super.finalizar();
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ServerMotd [hover=" + hover + ", custom_slots=" + custom_slots + ", EMPTY_UUID=" + EMPTY_UUID
+				+ ", descripcion=" + descripcion + ", hoverdescrp=" + hoverdescrp + ", config=" + config + "]";
 	}
 }

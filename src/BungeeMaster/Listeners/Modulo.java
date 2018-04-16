@@ -1,4 +1,6 @@
 package BungeeMaster.Listeners;
+import java.io.IOException;
+
 import BungeeMaster.BungeeMaster;
 import net.md_5.bungee.api.plugin.Listener;
 
@@ -41,4 +43,6 @@ public abstract class Modulo implements Listener
     public BungeeMaster getPlugin() {
         return plugin;
     }
+    
+    public void crearConfig() throws IOException{}
 }
