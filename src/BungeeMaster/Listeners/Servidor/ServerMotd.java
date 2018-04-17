@@ -1,7 +1,6 @@
 package BungeeMaster.Listeners.Servidor;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.UUID;
@@ -10,19 +9,13 @@ import java.util.concurrent.TimeUnit;
 import BungeeMaster.BungeeMaster;
 import BungeeMaster.Listeners.Modulo;
 import BungeeMaster.Recursos.Config;
-import net.md_5.bungee.api.Callback;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.ServerPing.Protocol;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.config.ListenerInfo;
-import net.md_5.bungee.api.event.AsyncEvent;
 import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.event.EventHandler;
 
-@SuppressWarnings("deprecation")
 public class ServerMotd extends Modulo
 {
 	private boolean hover;
@@ -65,7 +58,8 @@ public class ServerMotd extends Modulo
         }, 0L, 1L, java.util.concurrent.TimeUnit.SECONDS);*/
 	}
     
-    @EventHandler
+    @SuppressWarnings("deprecation")
+	@EventHandler
     public void onProxyPingEvent(ProxyPingEvent event)
     {
     	ServerPing ping;
@@ -82,7 +76,6 @@ public class ServerMotd extends Modulo
 
 	    	if(!descripcion[0].isEmpty() || !descripcion[1].isEmpty())
 	    		ping.setDescription(ChatColor.translateAlternateColorCodes('&', getPlugin().replace(descripcion[0])+(((descripcion[0]+descripcion[1]).isEmpty())?"":"&r"+'\n')+getPlugin().replace(descripcion[1])));
-	    	ping.setDescriptionComponent(new TextComponent("&3xx"));
 	    	
 	    	if(hover)
 	    	{
@@ -104,7 +97,9 @@ public class ServerMotd extends Modulo
 				@Override
 				public void run()
 				{
-					ping.setDescriptionComponent(new TextComponent("&3"+i));
+					event.registerIntent(getPlugin());
+					
+					ping.setDescriptionComponent(new TextComponent("CN: "+i));
 					getPlugin().console(String.valueOf(i));
 					i++;
 					
@@ -122,8 +117,8 @@ public class ServerMotd extends Modulo
 			crearConfig();
 			if(!isActivado())
 			{
-				super.iniciar();
 				leerConfig();
+				super.iniciar();
 			}
 		}
 		catch(IOException ex) {}
