@@ -170,10 +170,7 @@ public class BungeeMaster extends Plugin
         console(color+"(!) "+ChatColor.RESET+replace(mensajes.get(num, IDIOMA_CONSOLA)));
     }
     
-    public void console(ChatColor color, Object msg, String... args)
-    {
-        console(color+"(!) "+ChatColor.RESET+String.format(replace(msg.toString()), args));
-    }
+    
 
 	public Modulo getModulo(String name)
     {
