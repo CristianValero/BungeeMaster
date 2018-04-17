@@ -17,10 +17,25 @@ public class Mensajes
 	private ArrayList<Traducciones> lista;
 	private Lista<String> idiomas;
 	
+	private String servername;
+	private String serverdomain;
+	private int slots;
+	
 	public Mensajes()
 	{
 		this.lista = new ArrayList<Traducciones>();
 		this.idiomas = new Lista<String>();
+		
+		this.servername = "SERVERNAME";
+		this.serverdomain = "SERVERDOMAIN";
+		this.slots = -1;
+	}
+	
+	public void setData(String servername, String serverdomain, int slots)
+	{
+		this.servername = servername;
+		this.serverdomain = serverdomain;
+		this.slots = slots;
 	}
 	
 	public void cargar() throws IOException, ParseException
@@ -38,7 +53,10 @@ public class Mensajes
 			msg = (JSONObject) object.get(String.valueOf(contador));
 			Traducciones aux = new Traducciones();
 			for (String idioma : idiomas)
-				aux.add(new Mensaje(idioma.toLowerCase(), (String)msg.get(idioma)));
+				aux.add(new Mensaje(idioma.toLowerCase(), msg.get(idioma).toString()
+						.replaceAll("%servername%", servername)
+						.replaceAll("%serverdomain%", serverdomain)
+						.replaceAll("%maxplayers%", String.valueOf(slots))));
 			lista.add(aux);
 
 			contador++;

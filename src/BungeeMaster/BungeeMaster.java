@@ -84,6 +84,8 @@ public class BungeeMaster extends Plugin
     	        DOMINIO = config.getString(Datos.CONFIG_PROPIEDADES_DOMINIO);
     	        IDIOMA_CONSOLA = config.getString(Datos.CONFIG_LENG_CONSOLA);
     	        
+    	        mensajes.setData(NETWORK_NAME, DOMINIO, getSlots());
+    	        
     	        console(10);
     	        for (Modulo m : modulos)
     	        {
@@ -120,8 +122,7 @@ public class BungeeMaster extends Plugin
     	        }
 
                 config.save();
-
-                console(12);
+                
                 BungeeCord.getInstance().stop();
             }
 		}
@@ -198,7 +199,7 @@ public class BungeeMaster extends Plugin
     
     public int getOnline()
     {
-    	return getProxy().getInstance().getOnlineCount();
+    	return BungeeCord.getInstance().getOnlineCount();
     }
     
     public void registerListener(Listener listener)
