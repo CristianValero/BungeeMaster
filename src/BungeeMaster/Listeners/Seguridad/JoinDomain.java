@@ -26,12 +26,10 @@ public class JoinDomain extends Modulo
     @EventHandler
     public void alEntrar(LoginEvent e)
     {
-        if (!e.getConnection().getVirtualHost().getHostName().equals(getPlugin().getDominio()))
+        if (!e.getConnection().getVirtualHost().getHostName().equals(getPlugin().getDominio()) && getPlugin() != null)
         {
-            final String dominio = getPlugin().getDominio();
-            final String nombreServidor = getPlugin().getNetworkName();
-            String kickReason = getPlugin().getMensajes().get(15, getPlugin().getIdiomaConsola()).replace("%servername%", nombreServidor)
-                    .replace("%serverdomain%", dominio);
+            String kickReason = getPlugin().getMensajes().get(15, getPlugin().getIdiomaConsola()).replace("%servername%", getPlugin().getDominio())
+                    .replace("%serverdomain%", getPlugin().getNetworkName());
 
             e.setCancelled(true); //Denegamos el acceso al Servidor
             e.setCancelReason(ChatColor.translateAlternateColorCodes('&', kickReason)); //Establecemos un mensaje de kick
