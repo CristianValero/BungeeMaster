@@ -10,8 +10,6 @@ import BungeeMaster.Recursos.JsonSimple.parser.ParseException;
 import BungeeMaster.Recursos.Lenguaje.Mensajes;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.ServerPing;
-import net.md_5.bungee.api.ServerPing.PlayerInfo;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -162,17 +160,17 @@ public class BungeeMaster extends Plugin
     
     public void console(int num)
     {
-        console(ChatColor.RED, num);
+        console(ChatColor.GOLD, num);
     }
     
     public void console(ChatColor color, int num)
     {
-        console(color+"(!) "+ChatColor.RESET+replace(mensajes.get(num, IDIOMA_CONSOLA)));
+        console(color+"(!) "+ChatColor.RESET+mensajes.get(num, IDIOMA_CONSOLA));
     }
     
-    public void console(ChatColor color, Object msg, String... args)
+    public void console(ChatColor color, Object msg)
     {
-        console(color+"(!) "+ChatColor.RESET+String.format(replace(msg.toString()), args));
+        console(color+"(!) "+ChatColor.RESET+msg.toString());
     }
     
     public Modulo getModulo(String name)
@@ -193,13 +191,15 @@ public class BungeeMaster extends Plugin
         return DOMINIO;
     }
     
-    public String replace(String cad)
-	{
-		return cad
-			.replaceAll("%online%", String.valueOf(getProxy().getOnlineCount()))
-			.replaceAll("%slots%", String.valueOf(getProxy().getOnlineCount()))
-			.replaceAll("%name%", getNetworkName());
-	}
+    public int getSlots()
+    {
+    	return BungeeCord.getInstance().getConfig().getPlayerLimit();
+    }
+    
+    public int getOnline()
+    {
+    	return getProxy().getInstance().getOnlineCount();
+    }
     
     public void registerListener(Listener listener)
     {

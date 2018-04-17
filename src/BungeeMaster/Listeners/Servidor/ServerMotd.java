@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import BungeeMaster.BungeeMaster;
 import BungeeMaster.Listeners.Modulo;
@@ -12,7 +11,6 @@ import BungeeMaster.Recursos.Config;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ServerPing;
 import net.md_5.bungee.api.ServerPing.Protocol;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.event.EventHandler;
 
@@ -52,10 +50,10 @@ public class ServerMotd extends Modulo
 	    	ppp = event.getResponse().getPlayers();
 	    	
 	    	if(!custom_slots.isEmpty())
-	    		ping.setVersion(new Protocol(ChatColor.translateAlternateColorCodes('&', getPlugin().replace(custom_slots)), 1));
+	    		ping.setVersion(new Protocol(ChatColor.translateAlternateColorCodes('&', custom_slots), 1));
 
 	    	if(!descripcion[0].isEmpty() || !descripcion[1].isEmpty())
-	    		ping.setDescription(ChatColor.translateAlternateColorCodes('&', getPlugin().replace(descripcion[0])+(((descripcion[0]+descripcion[1]).isEmpty())?"":"&r"+'\n')+getPlugin().replace(descripcion[1])));
+	    		ping.setDescription(ChatColor.translateAlternateColorCodes('&', descripcion[0]+(((descripcion[0]+descripcion[1]).isEmpty())?"":"&r"+'\n')+descripcion[1]));
 	    	
 	    	if(hover)
 	    	{
@@ -64,7 +62,7 @@ public class ServerMotd extends Modulo
 	    		int i = 0;
 	    		for (String cad : hoverdescrp)
 	    		{
-	    			samples[i] = new ServerPing.PlayerInfo(ChatColor.translateAlternateColorCodes('&', getPlugin().replace(cad)), EMPTY_UUID);
+	    			samples[i] = new ServerPing.PlayerInfo(ChatColor.translateAlternateColorCodes('&', cad), EMPTY_UUID);
 	    			i++;
 	    		}
 		    	ppp.setSample(samples);
@@ -84,7 +82,10 @@ public class ServerMotd extends Modulo
 				super.iniciar();
 			}
 		}
-		catch(IOException ex) {}
+		catch(IOException ex)
+		{
+			console(ChatColor.RED, 15);
+		}
 	}
 
 	public void crearConfig() throws IOException
