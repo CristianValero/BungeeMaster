@@ -36,26 +36,6 @@ public class ServerMotd extends Modulo
 		this.custom_slots = "";
 		this.descripcion = new String[2];
 		this.hoverdescrp = new ArrayList<String>();
-		
-		/*callback = new Callback<ProxyPingEvent>()
-		{
-            @Override
-            public void done(ProxyPingEvent event, Throwable throwable)
-            {
-                event.getResponse().setDescription("holiz");
-            }
-        };
-        
-        bungeeCord.getScheduler().schedule(getPlugin(), new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                ServerPing ping = new ServerPing(new ServerPing.Protocol("protocolo 1", 2), new ServerPing.Players(10, 10, null), new TextComponent("hola"), null);
-                
-                bungeeCord.getPluginManager().callEvent(new ProxyPingEvent(scConnection, ping, callback));
-            }
-        }, 0L, 1L, java.util.concurrent.TimeUnit.SECONDS);*/
 	}
     
     @SuppressWarnings("deprecation")
@@ -89,23 +69,6 @@ public class ServerMotd extends Modulo
 	    		}
 		    	ppp.setSample(samples);
 	    	}
-	    	
-	    	/*getPlugin().getProxy().getScheduler().schedule(getPlugin(), new Runnable()
-	    	{
-	    		int i = 0;
-	    		
-				@Override
-				public void run()
-				{
-					event.registerIntent(getPlugin());
-					
-					ping.setDescriptionComponent(new TextComponent("CN: "+i));
-					getPlugin().console(String.valueOf(i));
-					i++;
-					
-					event.setResponse(ping);
-				}
-			}, 1, 1, TimeUnit.SECONDS);*/
         }
     }
 
