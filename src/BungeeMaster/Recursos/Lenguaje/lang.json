@@ -93,5 +93,10 @@
   {
     "en": "&cAccess denied to user %username% ( %ipplayer% ) user for trying to access the server with another server IP.",
     "es": "&cSe ha denegado el acceso al usuario %username% ( %ipplayer% ) por intentar entrar con otra IP al servidor."
+  },
+  "19":
+  {
+    "en": "&cAn error has ocurred in the activation of ( %modulename% ) module.",
+    "es": "&cEl módulo ( %modulename% ) ha sufrido un error durante su activación."
   }
 }

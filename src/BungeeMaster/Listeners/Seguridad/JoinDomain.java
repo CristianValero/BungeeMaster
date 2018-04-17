@@ -2,6 +2,7 @@ package BungeeMaster.Listeners.Seguridad;
 
 import BungeeMaster.BungeeMaster;
 import BungeeMaster.Listeners.Modulo;
+import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.event.LoginEvent;
 import net.md_5.bungee.event.EventHandler;
@@ -37,6 +38,8 @@ public class JoinDomain extends Modulo
 
             getPlugin().console(getPlugin().getMensajes().get(18, getPlugin().getIdiomaConsola()).replace("%username%", e.getConnection().getName())
                     .replace("%ipplayer%", e.getConnection().getAddress().getHostString()));
+
+            System.out.println("Hay: "+BungeeCord.getInstance().getOnlineCount()+"/"+BungeeCord.getInstance().getConfig().getPlayerLimit());
         }
     }
 
