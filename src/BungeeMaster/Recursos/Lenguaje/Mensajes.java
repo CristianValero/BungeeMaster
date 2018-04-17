@@ -33,6 +33,7 @@ public class Mensajes
 	
 	public void setData(String servername, String serverdomain, int slots)
 	{
+		//subete coño
 		this.servername = servername;
 		this.serverdomain = serverdomain;
 		this.slots = slots;
