@@ -2,6 +2,7 @@ package BungeeMaster.Listeners.Seguridad;
 
 import BungeeMaster.BungeeMaster;
 import BungeeMaster.Listeners.Modulo;
+import BungeeMaster.Recursos.Datos;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.event.LoginEvent;
@@ -28,16 +29,17 @@ public class JoinDomain extends Modulo
     {
         if (!e.getConnection().getVirtualHost().getHostName().equals(getPlugin().getDominio()) && getPlugin() != null)
         {
-            String kickReason = getPlugin().getMensajes().get(15, getPlugin().getIdiomaConsola()).replace("%servername%", getPlugin().getDominio())
-                    .replace("%serverdomain%", getPlugin().getNetworkName());
+            String kickReason = getPlugin().getMensajes().get(15, getPlugin().getIdiomaConsola())
+                    .replace(Datos.SERVER_NAME, getPlugin().getDominio())
+                    .replace(Datos.SERVER_DOMAIN, getPlugin().getNetworkName());
 
             e.setCancelled(true); //Denegamos el acceso al Servidor
             e.setCancelReason(ChatColor.translateAlternateColorCodes('&', kickReason)); //Establecemos un mensaje de kick
 
-            getPlugin().console(getPlugin().getMensajes().get(18, getPlugin().getIdiomaConsola()).replace("%username%", e.getConnection().getName())
-                    .replace("%ipplayer%", e.getConnection().getAddress().getHostString()));
+            getPlugin().console(getPlugin().getMensajes().get(18, getPlugin().getIdiomaConsola()).replace(Datos.USER_NAME, e.getConnection().getName())
+                    .replace(Datos.IP_PLAYER, e.getConnection().getAddress().getHostString()));
 
-            System.out.println("Hay: "+BungeeCord.getInstance().getOnlineCount()+"/"+BungeeCord.getInstance().getConfig().getPlayerLimit());
+            //System.out.println("Hay: "+BungeeCord.getInstance().getOnlineCount()+"/"+BungeeCord.getInstance().getConfig().getPlayerLimit());
         }
     }
 

@@ -1,5 +1,6 @@
 package BungeeMaster;
 
+import BungeeMaster.Listeners.Comandos.ModuleCommand;
 import BungeeMaster.Listeners.Modulo;
 import BungeeMaster.Listeners.Query.BBDD;
 import BungeeMaster.Listeners.Seguridad.JoinDomain;
@@ -8,15 +9,20 @@ import BungeeMaster.Recursos.Config;
 import BungeeMaster.Recursos.Datos;
 import BungeeMaster.Recursos.JsonSimple.parser.ParseException;
 import BungeeMaster.Recursos.Lenguaje.Mensajes;
+import BungeeMaster.Recursos.PlayerData.Jugador;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class BungeeMaster extends Plugin
 {
+    private ArrayList<Jugador> jugadores;
+
     private Modulo[] modulos;
     private BBDD bd;
     private Config config;
@@ -37,6 +43,8 @@ public class BungeeMaster extends Plugin
 		NETWORK_NAME = null;
 	    DOMINIO = null;
 	    IDIOMA_CONSOLA = "es";
+
+	    jugadores = new ArrayList<Jugador>();
 	}
 
 	@Override
@@ -89,14 +97,15 @@ public class BungeeMaster extends Plugin
     	        console(10);
     	        for (Modulo m : modulos)
     	        {
-    	        	m.crearConfig();
-    	            String path = "modulos."+m.getNombre();
+    	            m.crearConfig();
+    	            String path = "modules."+m.getNombre();
     	            if (config.getObject(path) != null && config.getBoolean(path))
     	                m.iniciar();
     	        }
     	        console(11);
     	        console(12);
-    	        //getProxy().getPluginManager().registerCommand(this, new ModuleCommand(this,"Modulo", Datos.PERMISO_ADMIN, "modulo", "module", "mdle", "md"));
+
+    	        getProxy().getPluginManager().registerCommand(this, new ModuleCommand(this,"Modulo", Datos.PERMISO_ADMIN, "modulo", "module", "mdle", "md"));
             }
             else
             {
@@ -115,10 +124,12 @@ public class BungeeMaster extends Plugin
                 
                 for (Modulo m : modulos)
     	        {
-                	m.crearConfig();
-    	            String path = "modulos."+m.getNombre();
-    	            if (config.getObject(path) == null)
-    	                config.setData(path, false);
+                    m.crearConfig();
+                    final String path = "modules."+m.getNombre();
+                    if (config.getObject(path) == null)
+                    {
+                        config.setData(path, false);
+                    }
     	        }
 
                 config.save();
@@ -182,6 +193,10 @@ public class BungeeMaster extends Plugin
         return null;
     }
 
+    public Modulo[] getModulos() {
+        return modulos;
+    }
+
     public String getNetworkName()
     {
         return NETWORK_NAME;
@@ -210,5 +225,25 @@ public class BungeeMaster extends Plugin
     public void unregisterListener(Listener listener)
     {
         getProxy().getPluginManager().unregisterListener(listener);
+    }
+
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void addJugador(Jugador j) {
+        this.jugadores.add(j);
+    }
+
+    public Jugador getJugador(ProxiedPlayer p) {
+        for (Jugador j : jugadores)
+            if (j.getJugador() == p)
+                return j;
+        return null;
+    }
+
+
+    public Config getMainConfig() {
+        return config;
     }
 }

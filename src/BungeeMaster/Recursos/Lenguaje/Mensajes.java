@@ -54,9 +54,9 @@ public class Mensajes
 			Traducciones aux = new Traducciones();
 			for (String idioma : idiomas)
 				aux.add(new Mensaje(idioma.toLowerCase(), msg.get(idioma).toString()
-						.replaceAll("%servername%", servername)
-						.replaceAll("%serverdomain%", serverdomain)
-						.replaceAll("%maxplayers%", String.valueOf(slots))));
+						.replaceAll(Datos.SERVER_NAME, servername)
+						.replaceAll(Datos.SERVER_DOMAIN, serverdomain)
+						.replaceAll(Datos.MAX_PLAYERS, String.valueOf(slots))));
 			lista.add(aux);
 
 			contador++;

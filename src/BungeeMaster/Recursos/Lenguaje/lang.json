@@ -1,13 +1,13 @@
 {
   "0":
   {
-    "en": "yes",
-    "es": "si"
+    "en": "Yes",
+    "es": "Si"
   },
   "1":
   {
-    "en": "no",
-    "es": "no"
+    "en": "No",
+    "es": "No"
   },
   "2":
   {
@@ -26,8 +26,8 @@
   },
   "5":
   {
-    "en": "You must specify a valid module name.",
-    "es": "Debes especificar un nombre de módulo válido."
+    "en": "&cYou must specify a valid module name.",
+    "es": "&cDebes especificar un nombre de módulo válido."
   },
   "6":
   {
@@ -56,7 +56,7 @@
   },
   "11":
   {
-    "en": "&bAll modlues have been iniciated, check console for possible errors.",
+    "en": "&bAll modules have been iniciated, check console for possible errors.",
     "es": "&bTodos los modulos han sido iniciados, revisar consola en caso de error."
   },
   "12":
@@ -98,5 +98,15 @@
   {
     "en": "&cAn error has ocurred in the activation of ( %modulename% ) module.",
     "es": "&cEl módulo ( %modulename% ) ha sufrido un error durante su activación."
+  },
+  "20":
+  {
+    "en": "&cNo information was found on the '%modulename%' module.",
+    "es": "&cNo se ha encontrado información acerca del módulo '%modulename%'."
+  },
+  "21":
+  {
+    "en": "&aThe module ( %modulename% ) has been activated correctly by %username%.",
+    "es": "&aEl módulo ( %modulename% ) ha sido activado correctamente por el usuario %username%."
   }
 }

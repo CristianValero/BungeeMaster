@@ -84,7 +84,7 @@ public class ServerMotd extends Modulo
 		}
 		catch(IOException ex)
 		{
-			console(ChatColor.RED, 19);
+			//console(ChatColor.RED, 19);
 		}
 	}
 

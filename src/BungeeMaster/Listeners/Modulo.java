@@ -2,7 +2,7 @@ package BungeeMaster.Listeners;
 import java.io.IOException;
 
 import BungeeMaster.BungeeMaster;
-import net.md_5.bungee.api.ChatColor;
+import BungeeMaster.Recursos.Datos;
 import net.md_5.bungee.api.plugin.Listener;
 
 public abstract class Modulo implements Listener
@@ -20,14 +20,14 @@ public abstract class Modulo implements Listener
     {
     	getPlugin().registerListener(this);
     	setActivado(true);
-    	console(ChatColor.GREEN, 13);
+    	console(13);
 	}
 
     public void finalizar()
     {
         getPlugin().unregisterListener(this);
         setActivado(false);
-        console(ChatColor.GREEN, 14);
+        console(14);
 	}
 
     public final String getNombre()
@@ -39,9 +39,9 @@ public abstract class Modulo implements Listener
         return activado;
     }
     
-    public void console(ChatColor color, int num)
+    public void console(int num)
     {
-    	getPlugin().console(color, getPlugin().getMensajes().get(num, getPlugin().getIdiomaConsola()).replace("%modulename%", getNombre()));
+    	getPlugin().console(getPlugin().getMensajes().get(num, getPlugin().getIdiomaConsola()).replace(Datos.MODULE_NAME, getNombre()));
     }
 
     public void setActivado(boolean activado)
@@ -52,6 +52,6 @@ public abstract class Modulo implements Listener
     public BungeeMaster getPlugin() {
         return plugin;
     }
-    
-    public void crearConfig() throws IOException{}
+
+    public void crearConfig() throws IOException {}
 }
