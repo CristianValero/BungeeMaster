@@ -41,7 +41,7 @@ public abstract class Modulo implements Listener
     
     public void console(ChatColor color, int num)
     {
-    	getPlugin().console(ChatColor.GREEN, getPlugin().getMensajes().get(num, getPlugin().getIdiomaConsola()).replace("%modulename%", getNombre()));
+    	getPlugin().console(color, getPlugin().getMensajes().get(num, getPlugin().getIdiomaConsola()).replace("%modulename%", getNombre()));
     }
 
     public void setActivado(boolean activado)
