@@ -39,10 +39,10 @@ public class ModuleCommand extends Command
                 switch (args[0].toLowerCase())
                 {
                     case "enable":
-                        activarModulo(args);
+                        accionModulo(args, true);
                         break;
                     case "disable":
-                        desactivarModulo(args);
+                        accionModulo(args, false);
                         break;
                     case "list":
                         enviarListaModulos();
@@ -62,7 +62,7 @@ public class ModuleCommand extends Command
         }
     }
 
-    private void desactivarModulo(String[] args) throws IOException
+    private void accionModulo(String[] args, boolean activar) throws IOException
     {
         if (args.length == 0)
             jugador.enviarMensaje(pl.getMensajes().get(5, jugador.getIdioma()));
@@ -71,11 +71,25 @@ public class ModuleCommand extends Command
             Modulo escrito = pl.getModulo(args[1]);
             if (escrito != null)
             {
-                if (!escrito.isActivado())
+                if (activar)
                 {
-                    jugador.enviarMensaje(pl.getMensajes().get(25, jugador.getIdioma())
-                            .replace(Datos.MODULE_NAME, escrito.getNombre()));
-                    return;
+                    if (escrito.isActivado())
+                    {
+                        jugador.enviarMensaje(pl.getMensajes().get(24, jugador.getIdioma())
+                                .replace(Datos.MODULE_NAME, escrito.getNombre()));
+                        return;
+                    }
+
+                    enviarDecision(23, escrito.getNombre(), "bmd enable "+escrito.getNombre()+" true");
+                }
+                else
+                {
+                    if (!escrito.isActivado())
+                    {
+                        jugador.enviarMensaje(pl.getMensajes().get(25, jugador.getIdioma())
+                                .replace(Datos.MODULE_NAME, escrito.getNombre()));
+                        return;
+                    }
                 }
 
                 enviarDecision(26, escrito.getNombre(), "bmd disable "+escrito.getNombre()+" true");
@@ -86,49 +100,22 @@ public class ModuleCommand extends Command
         else if (args.length == 2 && args[2].equals("true"))
         {
             Modulo escrito = pl.getModulo(args[1]);
-            escrito.finalizar();
-
-            pl.getMainConfig().setData("modules."+escrito.getNombre(), false).save();
-
-            jugador.enviarMensaje(pl.getMensajes().get(14, jugador.getIdioma())
-                    .replace(Datos.MODULE_NAME, escrito.getNombre()));
-
-            pl.console(ChatColor.GREEN, 27);
-        }
-    }
-
-    private void activarModulo(String[] args) throws IOException
-    {
-        if (args.length == 0)
-            jugador.enviarMensaje(pl.getMensajes().get(5, jugador.getIdioma()));
-        else if (args.length == 1)
-        {
-            Modulo escrito = pl.getModulo(args[1]);
-            if (escrito != null)
+            if (activar)
             {
-                if (escrito.isActivado())
-                {
-                    jugador.enviarMensaje(pl.getMensajes().get(24, jugador.getIdioma())
-                            .replace(Datos.MODULE_NAME, escrito.getNombre()));
-                    return;
-                }
-
-                enviarDecision(23, escrito.getNombre(), "bmd enable "+escrito.getNombre()+" true");
+                escrito.iniciar();
+                pl.getMainConfig().setData("modules."+escrito.getNombre(), true).save();
+                jugador.enviarMensaje(pl.getMensajes().get(13, jugador.getIdioma())
+                        .replace(Datos.MODULE_NAME, escrito.getNombre()));
+                pl.console(ChatColor.GREEN, 21);
             }
             else
-                jugador.enviarMensaje(pl.getMensajes().get(20, jugador.getIdioma()));
-        }
-        else if (args.length == 2 && args[2].equals("true"))
-        {
-            Modulo escrito = pl.getModulo(args[1]);
-            escrito.iniciar();
-
-            pl.getMainConfig().setData("modules."+escrito.getNombre(), true).save();
-
-            jugador.enviarMensaje(pl.getMensajes().get(13, jugador.getIdioma())
-                    .replace(Datos.MODULE_NAME, escrito.getNombre()));
-
-            pl.console(ChatColor.GREEN, 21);
+            {
+                escrito.finalizar();
+                pl.getMainConfig().setData("modules."+escrito.getNombre(), false).save();
+                jugador.enviarMensaje(pl.getMensajes().get(14, jugador.getIdioma())
+                        .replace(Datos.MODULE_NAME, escrito.getNombre()));
+                pl.console(ChatColor.GREEN, 27);
+            }
         }
     }
 
