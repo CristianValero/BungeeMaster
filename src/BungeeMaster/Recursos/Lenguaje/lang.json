@@ -46,8 +46,8 @@
   },
   "9":
   {
-    "en": "&a&lYES\n\n§&Click for &aaaccept &7the action",
-    "es": "&a&lSI\n\n§&Click para &aaceptar &7la acción."
+    "en": "§a§lYES\n\n§7Click for §aallow §7the action",
+    "es": "§a§lSI\n\n§7Click para §apermitir §7la acción."
   },
   "10":
   {
@@ -108,5 +108,20 @@
   {
     "en": "&aThe module ( %modulename% ) has been activated correctly by %username%.",
     "es": "&aEl módulo ( %modulename% ) ha sido activado correctamente por el usuario %username%."
+  },
+  "22":
+  {
+    "en": "§c§lNO\n\n§7Click for §ccancel §7the action",
+    "es": "§c§lNO\n\n§7Click para §ccancelar §7la acción."
+  },
+  "23":
+  {
+    "en": "&a(!) &eAre you sure want to enable %modulename%?",
+    "es": "&a(!) &e¿Estás seguro de que quieres activar el módulo %modulename%?"
+  },
+  "24":
+  {
+    "en": "&cThe module %modulename% is already activated.",
+    "es": "&cEl módulo %modulename% ya se encuentra activado."
   }
 }

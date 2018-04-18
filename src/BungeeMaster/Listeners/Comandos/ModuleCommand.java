@@ -65,22 +65,34 @@ public class ModuleCommand extends Command
     {
         if (args.length == 0)
             jugador.enviarMensaje(pl.getMensajes().get(5, jugador.getIdioma()));
-        else
+        else if (args.length == 1)
         {
             Modulo escrito = pl.getModulo(args[1]);
             if (escrito != null)
             {
-                escrito.iniciar();
+                if (escrito.isActivado())
+                {
+                    jugador.enviarMensaje(pl.getMensajes().get(24, jugador.getIdioma())
+                            .replace(Datos.MODULE_NAME, escrito.getNombre()));
+                    return;
+                }
 
-                pl.getMainConfig().setData("modules."+escrito.getNombre()+".activated", true).save();
-
-                jugador.enviarMensaje(pl.getMensajes().get(13, jugador.getIdioma())
-                .replace(Datos.MODULE_NAME, escrito.getNombre()));
-
-                pl.console(ChatColor.GREEN, 21);
+                enviarDecision(escrito.getNombre(), "bmd enable "+escrito.getNombre()+" true");
             }
             else
                 jugador.enviarMensaje(pl.getMensajes().get(20, jugador.getIdioma()));
+        }
+        else if (args.length == 2 && args[2].equals("true"))
+        {
+            Modulo escrito = pl.getModulo(args[1]);
+            escrito.iniciar();
+
+            pl.getMainConfig().setData("modules."+escrito.getNombre(), true).save();
+
+            jugador.enviarMensaje(pl.getMensajes().get(13, jugador.getIdioma())
+                    .replace(Datos.MODULE_NAME, escrito.getNombre()));
+
+            pl.console(ChatColor.GREEN, 21);
         }
     }
 
@@ -95,47 +107,51 @@ public class ModuleCommand extends Command
             mensaje = new TextComponent(" - ");
             mensaje.setColor(ChatColor.GRAY);
 
+            nmbre = new TextComponent(m.getNombre());
+            final String atb1 = "§e§l"+pl.getMensajes().get(7, jugador.getIdioma())
+                    .replaceAll(Datos.MODULE_NAME, m.getNombre()).toUpperCase();
+
+            String atributo = "", atb2 = "";
             if (m.isActivado())
             {
-                nmbre = new TextComponent(m.getNombre());
                 nmbre.setColor(ChatColor.GREEN);
-                final String atb1 = pl.getMensajes().get(5, jugador.getIdioma())
-                        .replaceAll(Datos.MODULE_NAME, m.getNombre()).toUpperCase();
-                final String atb2 = "§7"+pl.getMensajes().get(8, jugador.getIdioma())+": "+
-                        "§a"+pl.getMensajes().get(0, jugador.getIdioma()).toUpperCase();
-                String atributo = atb1 + "\n\n" + atb2;
-                mensaje.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(atributo).color(ChatColor.YELLOW).bold(true).create()));
+                atb2 = "§7"+pl.getMensajes().get(8, jugador.getIdioma())+": "+
+                        "§a§l"+pl.getMensajes().get(0, jugador.getIdioma()).toUpperCase();
             }
             else
             {
-                nmbre = new TextComponent(m.getNombre());
-                nmbre.setColor(ChatColor.GREEN);
-                final String atb1 = pl.getMensajes().get(5, jugador.getIdioma())
-                        .replaceAll(Datos.MODULE_NAME, m.getNombre()).toUpperCase();
-                final String atb2 = "§7"+pl.getMensajes().get(8, jugador.getIdioma())+": "+
-                        "§c"+pl.getMensajes().get(0, jugador.getIdioma()).toUpperCase();
-                String atributo = atb1 + "\n\n" + atb2;
-                mensaje.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(atributo).color(ChatColor.YELLOW).bold(true).create()));
+                nmbre.setColor(ChatColor.RED);
+                atb2 = "§7"+pl.getMensajes().get(8, jugador.getIdioma())+": "+
+                        "§c§l"+pl.getMensajes().get(1, jugador.getIdioma()).toUpperCase();
             }
+
+            atributo = atb1 + "\n\n" + atb2;
+            mensaje.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(atributo).create()));
             jugador.enviarMensaje(mensaje);
         }
     }
 
-    private void enviarDecision(CommandSender sender, String comando)
+    private void enviarDecision(String mName, String comando)
     {
-        TextComponent decision = new TextComponent("[SI] ");
+        jugador.enviarMensaje(pl.getMensajes().get(23, jugador.getIdioma()).replace(Datos.MODULE_NAME, mName));
+
+        TextComponent decision = new TextComponent("[" + pl.getMensajes().get(0, jugador.getIdioma()).toUpperCase() + "]");
         decision.setColor(ChatColor.GREEN);
         decision.setBold(true);
-        decision.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§a§lSI\n\n§7Click para §aaceptar §7la acción.").create()));
+        decision.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                new ComponentBuilder(pl.getMensajes().get(9, jugador.getIdioma()))
+                        .create()));
         decision.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, comando));
 
         TextComponent negacion = new TextComponent("[NO]");
         negacion.setColor(ChatColor.RED);
         negacion.setBold(true);
-        negacion.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§c§lNO\n\n§7Click para §cdenegar §7la acción.").create()));
+        negacion.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                new ComponentBuilder(pl.getMensajes().get(22, jugador.getIdioma()))
+                        .create()));
 
         decision.addExtra(negacion);
 
-        sender.sendMessage(decision);
+        jugador.enviarMensaje(decision);
     }
 }
