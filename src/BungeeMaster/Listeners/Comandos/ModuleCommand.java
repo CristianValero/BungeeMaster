@@ -42,6 +42,7 @@ public class ModuleCommand extends Command
                         activarModulo(args);
                         break;
                     case "disable":
+                        desactivarModulo(args);
                         break;
                     case "list":
                         enviarListaModulos();
@@ -61,6 +62,41 @@ public class ModuleCommand extends Command
         }
     }
 
+    private void desactivarModulo(String[] args) throws IOException
+    {
+        if (args.length == 0)
+            jugador.enviarMensaje(pl.getMensajes().get(5, jugador.getIdioma()));
+        else if (args.length == 1)
+        {
+            Modulo escrito = pl.getModulo(args[1]);
+            if (escrito != null)
+            {
+                if (!escrito.isActivado())
+                {
+                    jugador.enviarMensaje(pl.getMensajes().get(25, jugador.getIdioma())
+                            .replace(Datos.MODULE_NAME, escrito.getNombre()));
+                    return;
+                }
+
+                enviarDecision(26, escrito.getNombre(), "bmd disable "+escrito.getNombre()+" true");
+            }
+            else
+                jugador.enviarMensaje(pl.getMensajes().get(20, jugador.getIdioma()));
+        }
+        else if (args.length == 2 && args[2].equals("true"))
+        {
+            Modulo escrito = pl.getModulo(args[1]);
+            escrito.finalizar();
+
+            pl.getMainConfig().setData("modules."+escrito.getNombre(), false).save();
+
+            jugador.enviarMensaje(pl.getMensajes().get(14, jugador.getIdioma())
+                    .replace(Datos.MODULE_NAME, escrito.getNombre()));
+
+            pl.console(ChatColor.GREEN, 27);
+        }
+    }
+
     private void activarModulo(String[] args) throws IOException
     {
         if (args.length == 0)
@@ -77,7 +113,7 @@ public class ModuleCommand extends Command
                     return;
                 }
 
-                enviarDecision(escrito.getNombre(), "bmd enable "+escrito.getNombre()+" true");
+                enviarDecision(23, escrito.getNombre(), "bmd enable "+escrito.getNombre()+" true");
             }
             else
                 jugador.enviarMensaje(pl.getMensajes().get(20, jugador.getIdioma()));
@@ -131,9 +167,9 @@ public class ModuleCommand extends Command
         }
     }
 
-    private void enviarDecision(String mName, String comando)
+    private void enviarDecision(int msg, String mName, String comando)
     {
-        jugador.enviarMensaje(pl.getMensajes().get(23, jugador.getIdioma()).replace(Datos.MODULE_NAME, mName));
+        jugador.enviarMensaje(pl.getMensajes().get(msg, jugador.getIdioma()).replace(Datos.MODULE_NAME, mName));
 
         TextComponent decision = new TextComponent("[" + pl.getMensajes().get(0, jugador.getIdioma()).toUpperCase() + "]");
         decision.setColor(ChatColor.GREEN);

@@ -123,5 +123,20 @@
   {
     "en": "&cThe module %modulename% is already activated.",
     "es": "&cEl módulo %modulename% ya se encuentra activado."
+  },
+  "25":
+  {
+    "en": "&cThe module %modulename% is already disabled.",
+    "es": "&cEl módulo %modulename% ya se encuentra desactivado."
+  },
+  "26":
+  {
+    "en": "&c(!) &eAre you sure want to disable %modulename%?",
+    "es": "&a(!) &e¿Estás seguro de que quieres desactivar el módulo %modulename%?"
+  },
+  "27":
+  {
+    "en": "&cThe module ( %modulename% ) has been disabled correctly by %username%.",
+    "es": "&cEl módulo ( %modulename% ) ha sido desactivado correctamente por el usuario %username%."
   }
 }
