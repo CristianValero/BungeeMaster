@@ -1,4 +1,4 @@
-package BungeeMaster.Listeners.Query;
+package BungeeMaster.Recursos.Query;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -65,7 +65,9 @@ public class BBDD
     
     public void crearTablas()
     {
-    	
+    	final String usuarios = "CREATE TABLE IF NOT EXISTS "+prefix+"usuarios"+" " +
+				"( id INT PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(16), ip VARCHAR(50), uuid VARCHAR(50, idioma VARCHAR(10) ) " +
+				"Engine=InnoDB;";
     }
 
 	public String getHost() {

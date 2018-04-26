@@ -3,7 +3,6 @@ package BungeeMaster.Listeners.Seguridad;
 import BungeeMaster.BungeeMaster;
 import BungeeMaster.Listeners.Modulo;
 import BungeeMaster.Recursos.Datos;
-import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.event.LoginEvent;
 import net.md_5.bungee.event.EventHandler;

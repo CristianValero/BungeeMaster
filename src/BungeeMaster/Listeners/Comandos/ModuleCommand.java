@@ -3,7 +3,7 @@ package BungeeMaster.Listeners.Comandos;
 import BungeeMaster.BungeeMaster;
 import BungeeMaster.Listeners.Modulo;
 import BungeeMaster.Recursos.Datos;
-import BungeeMaster.Recursos.PlayerData.Jugador;
+import BungeeMaster.Recursos.Jugador;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -34,30 +34,33 @@ public class ModuleCommand extends Command
         {
             jugador = pl.getJugador((ProxiedPlayer) commandSender);
 
-            try
+            if (jugador.isLogueado())
             {
-                switch (args[0].toLowerCase())
+                try
                 {
-                    case "enable":
-                        accionModulo(args, true);
-                        break;
-                    case "disable":
-                        accionModulo(args, false);
-                        break;
-                    case "list":
-                        enviarListaModulos();
-                        break;
-                    default:
-                        jugador.enviarMensaje(4);
-                        jugador.enviarMensaje("§c - /bmd list");
-                        jugador.enviarMensaje("§c - /bmd enable <module>");
-                        jugador.enviarMensaje("§c - /bmd disable <module>");
-                        break;
+                    switch (args[0].toLowerCase())
+                    {
+                        case "enable":
+                            accionModulo(args, true);
+                            break;
+                        case "disable":
+                            accionModulo(args, false);
+                            break;
+                        case "list":
+                            enviarListaModulos();
+                            break;
+                        default:
+                            jugador.enviarMensaje(4);
+                            jugador.enviarMensaje("§c - /bmd list");
+                            jugador.enviarMensaje("§c - /bmd enable <module>");
+                            jugador.enviarMensaje("§c - /bmd disable <module>");
+                            break;
+                    }
                 }
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
     }

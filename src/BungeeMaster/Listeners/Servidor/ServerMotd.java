@@ -73,18 +73,10 @@ public class ServerMotd extends Modulo
 	@Override
 	public void iniciar()
 	{
-		try
+		if (!isActivado())
 		{
-			crearConfig();
-			if(!isActivado())
-			{
-				leerConfig();
-				super.iniciar();
-			}
-		}
-		catch(IOException ex)
-		{
-			//console(ChatColor.RED, 19);
+			leerConfig();
+			super.iniciar();
 		}
 	}
 

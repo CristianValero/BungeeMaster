@@ -138,5 +138,10 @@
   {
     "en": "&cThe module ( %modulename% ) has been disabled correctly by %username%.",
     "es": "&cEl módulo ( %modulename% ) ha sido desactivado correctamente por el usuario %username%."
+  },
+  "28":
+  {
+    "en": "&c&l%servername%\n&7Your ip has exceeded the maximum number of possible connections.",
+    "es": "&c&l%servername%\n&7Tu ip ha excedido el máximo número de conexiones posibles."
   }
 }

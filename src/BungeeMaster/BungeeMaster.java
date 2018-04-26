@@ -2,14 +2,14 @@ package BungeeMaster;
 
 import BungeeMaster.Listeners.Comandos.ModuleCommand;
 import BungeeMaster.Listeners.Modulo;
-import BungeeMaster.Listeners.Query.BBDD;
+import BungeeMaster.Recursos.Query.BBDD;
 import BungeeMaster.Listeners.Seguridad.JoinDomain;
 import BungeeMaster.Listeners.Servidor.ServerMotd;
 import BungeeMaster.Recursos.Config;
 import BungeeMaster.Recursos.Datos;
 import BungeeMaster.Recursos.JsonSimple.parser.ParseException;
 import BungeeMaster.Recursos.Lenguaje.Mensajes;
-import BungeeMaster.Recursos.PlayerData.Jugador;
+import BungeeMaster.Recursos.Jugador;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
@@ -18,8 +18,9 @@ import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class BungeeMaster extends Plugin
+public class BungeeMaster extends Plugin implements Listener
 {
     private ArrayList<Jugador> jugadores;
 
@@ -104,8 +105,6 @@ public class BungeeMaster extends Plugin
     	        }
     	        console(11);
     	        console(12);
-
-    	        getProxy().getPluginManager().registerCommand(this, new ModuleCommand(this,"Modulo", Datos.PERMISO_ADMIN, "modulo", "module", "mdle", "md"));
             }
             else
             {
@@ -140,6 +139,10 @@ public class BungeeMaster extends Plugin
         catch (ClassNotFoundException e){ e.printStackTrace(); BungeeCord.getInstance().stop(); }
         catch (IOException e){ e.printStackTrace(); BungeeCord.getInstance().stop(); }
         //catch (SQLException e){ e.printStackTrace(); BungeeCord.getInstance().stop(); }
+
+        getProxy().getPluginManager().registerCommand(this, new ModuleCommand(this,"Modulo", Datos.PERMISO_ADMIN, "modulo", "module", "mdle", "md"));
+
+        BungeeCord.getInstance().registerChannel("Return");
     }
 
     @Override
@@ -242,6 +245,36 @@ public class BungeeMaster extends Plugin
         return null;
     }
 
+    public Jugador getJugador(String cse, String d)
+    {
+        for (Jugador j : jugadores)
+        {
+            if (d.equals("name"))
+            {
+                if (j.getJugador().getName().equals(cse))
+                    return j;
+            }
+            else if (d.equals("ip"))
+            {
+                if (j.getJugador().getAddress().getHostString().equals(cse))
+                    return j;
+            }
+        }
+        return null;
+    }
+
+    public void remJugador(String name) {
+        List<Jugador> aux = new ArrayList<>();
+        for (Jugador j : jugadores)
+            if (j.getJugador().getName().equals(name))
+                aux.add(j);
+        jugadores.removeAll(aux);
+        aux.clear();
+    }
+
+    public BBDD getBd() {
+        return bd;
+    }
 
     public Config getMainConfig() {
         return config;

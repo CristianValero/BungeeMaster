@@ -41,7 +41,7 @@ public class Mensajes
 	public void cargar() throws IOException, ParseException
 	{
 		InputStream is = getClass().getResourceAsStream(Datos.LANG_JSON_PATH);
-        InputStreamReader isr = new InputStreamReader(is);
+        InputStreamReader isr = new InputStreamReader(is, "UTF8");
         BufferedReader br = new BufferedReader(isr);
 
         JSONParser parser = new JSONParser();

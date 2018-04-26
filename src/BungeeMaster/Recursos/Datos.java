@@ -21,13 +21,14 @@ public class Datos
 
     public static final String LANG_JSON_PATH = "lang.json";
 
-    public static int MENSAJES_CARGADOS = 18;
-
     /** Reemplazamientos */
     public static final String MODULE_NAME = "%modulename%";
-    public static final String USER_NAME = "%username";
+    public static final String USER_NAME = "%username%";
     public static final String SERVER_DOMAIN = "%serverdomain%";
     public static final String SERVER_NAME = "%servername%";
     public static final String IP_PLAYER = "%ipplayer%";
     public static final String MAX_PLAYERS = "%maxplayers%";
+
+    /** Tablas de la base de datos */
+    public static final String PLAYERS_TABLE = "usuarios";
 }
