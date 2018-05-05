@@ -10,8 +10,6 @@ public class test
 {
     public static void main(String args[]) throws IOException, ParseException
     {
-        Translator translate = Translator.getInstance();
-        String text = translate.translate("Hello!", Language.ENGLISH, Language.ROMANIAN);
-        System.out.println(text); // "Bună ziua!"
+
     }
 }

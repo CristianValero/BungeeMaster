@@ -1,4 +1,4 @@
-package BungeeMaster.Listeners.Servidor;
+package BungeeMaster.Listeners.Modulos.Servidor;
 
 import java.io.IOException;
 import java.util.ArrayList;

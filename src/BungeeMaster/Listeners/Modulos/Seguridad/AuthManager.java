@@ -1,4 +1,4 @@
-package BungeeMaster.Listeners.Seguridad;
+package BungeeMaster.Listeners.Modulos.Seguridad;
 
 import BungeeMaster.BungeeMaster;
 import BungeeMaster.Listeners.Modulo;

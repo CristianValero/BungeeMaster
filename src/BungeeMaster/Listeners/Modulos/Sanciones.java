@@ -1,6 +1,7 @@
-package BungeeMaster.Listeners.Comandos.Sanciones;
+package BungeeMaster.Listeners.Modulos;
 
 import BungeeMaster.BungeeMaster;
+import BungeeMaster.Listeners.Comandos.Sanciones.*;
 import BungeeMaster.Listeners.Modulo;
 import BungeeMaster.Recursos.Datos;
 import BungeeMaster.Recursos.Jugador;
@@ -66,8 +67,6 @@ public class Sanciones extends Modulo
     {
         if (!isActivado())
         {
-            super.iniciar();
-
             getPlugin().getProxy().getPluginManager().registerCommand(getPlugin(), alert);
             getPlugin().getProxy().getPluginManager().registerCommand(getPlugin(), kick);
             getPlugin().getProxy().getPluginManager().registerCommand(getPlugin(), mute);
@@ -75,6 +74,8 @@ public class Sanciones extends Modulo
             getPlugin().getProxy().getPluginManager().registerCommand(getPlugin(), ban);
             getPlugin().getProxy().getPluginManager().registerCommand(getPlugin(), unban);
             getPlugin().getProxy().getPluginManager().registerCommand(getPlugin(), unmute);
+
+            super.iniciar();
         }
     }
 
