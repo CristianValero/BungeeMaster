@@ -143,5 +143,85 @@
   {
     "en": "&c&l%servername%\n&7Your ip has exceeded the maximum number of possible connections.",
     "es": "&c&l%servername%\n&7Tu ip ha excedido el máximo número de conexiones posibles."
+  },
+  "29":
+  {
+    "en": "&c¡Opss! You're muted. Your mute expires in %minutes% minutes.",
+    "es": "&c¡Opps! Estás silenciado. Tu muteo expirará en %minutes% minutos."
+  },
+  "30":
+  {
+    "en": "&cInsuficient arguments to mute one player. /mute <name> <time> <reason>",
+    "es": "&cArgumentos insuficientes para mutear a un jugador. /mute <nombre> <tiempo> <motivo>"
+  },
+  "31":
+  {
+    "en": "&cYou cannot mute %username% user because isn't online or isn't logued.",
+    "es": "&cNo puedes silenciar al usuario %username% porque no está online o no se ha logueado."
+  },
+  "32":
+  {
+    "en": "&cThe specified mute time is not valid. (Min 1 y  Max 10 minutes)",
+    "es": "&El tiempo de silencio especificaco no es válido. (Min 1 y  Máx 10 minutos)"
+  },
+  "33":
+  {
+    "en": "&cYou have been muted by %modname% with reason %reason% for %time% minutes.",
+    "es": "&cHas sido silenciado por %modname% con motivo de %reason% durante %time% minutos."
+  },
+  "34":
+  {
+    "en": "&cPlayer from your session has been muted. Thanks you for reporting.",
+    "es": "&cUn jugador de tu sesión ha sido silenciado. Gracias por ayudarnos reportando."
+  },
+  "35":
+  {
+    "en": "&cFatal error ocurred while trying to execute this command.",
+    "es": "&cHa ocurrido un error fatal al intentar ejecutar este comando."
+  },
+  "36":
+  {
+    "en": "&c%modname% muted %username% with reason %reason% for %time% minutes.",
+    "es": "&c%modname% ha silenciado a %username% con motivo %reason% durante %time% minutos."
+  },
+  "37":
+  {
+    "en": "&c%modname% muted %username% with reason %reason% for %time% minutes.",
+    "es": "&c%modname% ha silenciado a %username% con motivo %reason% durante %time% minutos."
+  },
+  "38":
+  {
+    "en": "&cWoops! %username% is already muted.",
+    "es": "&c¡Uppps! El jugador %username% ya se encuentra silenciado."
+  },
+  "39":
+  {
+    "en": "&aYou have been muted user %username% for %time% minutes.",
+    "es": "&aHas silenciado al jugador %username% durante %time% minutos."
+  },
+  "40":
+  {
+    "en": "&cInsuficient arguments to unmute one player. /unmute <name>",
+    "es": "&cArgumentos insuficientes para eliminar el silencio a un jugador. /unmute <nombre>"
+  },
+  "41":
+  {
+    "en": "&cYou cannot unmute %username% because isn't online or isn't logued.",
+    "es": "&cNo puedes eliminar el silencio al usuario %username% porque no está online o no se ha logueado."
+  },
+  "42":
+  {
+    "en": "&aNow you can talk on chat. You're unmuted.",
+    "es": "&cYa puedes hablar por el chat. Tu silencio ha sido eliminado."
+  },
+  "43":
+  {
+    "en": "&aYou have unmuted the player '%username%'.",
+    "es": "&aHas eliminado el silencio del jugador '%username%'."
+  },
+  "44":
+  {
+    "en": "&a%modname% unmuted %username%.",
+    "es": "&a%modname% ha eliminado el silencio a %username%."
   }
 }

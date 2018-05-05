@@ -249,12 +249,12 @@ public class BungeeMaster extends Plugin implements Listener
     {
         for (Jugador j : jugadores)
         {
-            if (d.equals("name"))
+            if (d.equalsIgnoreCase("name"))
             {
                 if (j.getJugador().getName().equals(cse))
                     return j;
             }
-            else if (d.equals("ip"))
+            else if (d.equalsIgnoreCase("ip"))
             {
                 if (j.getJugador().getAddress().getHostString().equals(cse))
                     return j;

@@ -11,7 +11,7 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import net.md_5.bungee.event.EventPriority;
 
-public class MainListeners implements Listener
+public class MainListeners implements Listener //Clase para eventos no moduleables.
 {
     private BungeeMaster pl;
 

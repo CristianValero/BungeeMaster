@@ -6,6 +6,7 @@ public class Datos
     public static final String CONFIG_NAME = "config";
 
     public static final String PERMISO_ADMIN = "bungeemaster.admin";
+    public static final String PERMISO_MODERADOR = "bungeemaster.moderador";
 
     /** RUTAS DE LA CONFIG */
     public static final String CONFIG_PROPIEDADES_SERVIDOR = "properties.servidor";
@@ -28,6 +29,10 @@ public class Datos
     public static final String SERVER_NAME = "%servername%";
     public static final String IP_PLAYER = "%ipplayer%";
     public static final String MAX_PLAYERS = "%maxplayers%";
+    public static final String MINUTOS = "%minutes%";
+    public static final String MODNAME = "%modname%";
+    public static final String REASON = "%reason%";
+    public static final String TIME = "%time%";
 
     /** Tablas de la base de datos */
     public static final String PLAYERS_TABLE = "usuarios";
